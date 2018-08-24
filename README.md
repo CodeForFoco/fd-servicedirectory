@@ -47,6 +47,19 @@ This is not doing outreach in the community beyond the proposed role of helping 
 4. **App data must be updatable by a civilian/non-DBA.** This means that using a Google Sheet, Excel file, or CSV as the source-of-truth is heavily recommended in early stages. Eventually a full-fledge backend backed by a relational database makes sense, but especially in phase 1 that's overkill. Prove usefulness before we build cool features.
 5. **App data maintainence is currently slated to be a PFA responsibility.** That likely requires them assigning someone (perhaps Michael Durkin, perhaps someone else) to call listed agencies and update the data based on what they say. (Long-term, that could shift) but for now plan on that.
 
-# Code Matters
+## Proposed Phasing
 
-What languages and libraries does this use? **That's for the technical lead to decide.** Will it be you?
+0. [complete] Gather requirements and create sample data set.
+1. [current] Gather technical team and buid out prototype with sample data set.
+
+Future steps could include:
+
+1. Test prototype with PFA officers and gather feedback
+2. Finish the prototype if it prove effective
+3. Creating a web-version of the resource
+4. Creating an admin interface for PFA (and partner agencies?) to keep data up-to-date intelligently
+4. Sharing our application code with others to use in their local area
+
+## Code Details
+
+What languages and libraries does this project use? **That's for the technical lead to decide.** Will it be you?
