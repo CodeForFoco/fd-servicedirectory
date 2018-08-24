@@ -38,7 +38,7 @@ This is not doing outreach in the community beyond the proposed role of helping 
 
 ## Identified Requirements
 
-* App should run on Fire Department hardware. Right now, this means Windows Tablets and iPhones. [@Michael Durkin, is that accurate. I guessed.]
+* App should run easily on PFA-issued hardware. Right now, this means Windows Tablets and iPhones. [@Michael Durkin, is that accurate. I guessed.]
 * App should be multilingual. Maintain the data in English in Spanish is a need-to-have feature because our community speaks both of those languages.
 * App should work offline. While it can be a web-focused or web-tool-using project, it is often the case that cell phone service is bad on a call. So some offline caching of the data so that it works fine in that scenario is crucial.
 * App data must be updatable by a civilian. This means that using a Google Sheet, Excel file, or CSV as the source-of-truth is heavily recommended in early stages. Eventually a full-fledge backend backed by a relational database makes sense, but especially in phase 1 that's overkill. Prove usefulness before we build cool features.
