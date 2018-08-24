@@ -2,7 +2,7 @@
 
 ## Project Status
 
-
+Ready-to-prototype
 
 ## Project Leaders
 
@@ -39,12 +39,14 @@ This is not doing outreach in the community beyond the proposed role of helping 
 
 ## Identified Requirements
 
-* App should run easily on PFA-issued hardware. Right now, this means Windows Tablets and iPhones. [@Michael Durkin, is that accurate. I guessed.]
-* App should be multilingual. Maintain the data in English in Spanish is a need-to-have feature because our community speaks both of those languages.
-* App should work offline. While it can be a web-focused or web-tool-using project, it is often the case that cell phone service is bad on a call. So some offline caching of the data so that it works fine in that scenario is crucial.
-* App data must be updatable by a civilian. This means that using a Google Sheet, Excel file, or CSV as the source-of-truth is heavily recommended in early stages. Eventually a full-fledge backend backed by a relational database makes sense, but especially in phase 1 that's overkill. Prove usefulness before we build cool features.
-* App data maintainence is currently slated to be a PFA responsibility. That likely requires them assigning someone (perhaps Michael Durkin, perhaps someone else) to call listed agencies and update the data based on what they say. (Long-term, that could shift) but for now plan on that.
+(numbered for ease of conversation, not by priority)
+
+1. **App should run easily on PFA-issued hardware.** Right now, this means Windows Tablets and iPhones. [@Michael Durkin, is that accurate. I guessed.]
+2. **App should be multilingual.** Maintain the data in English in Spanish is a need-to-have feature because our community speaks both of those languages.
+3. **App should work offline.** While it can be a web-focused or web-tool-using project, it is often the case that cell phone service is bad on a call. So some offline caching of the data so that it works fine in that scenario is crucial.
+4. **App data must be updatable by a civilian/non-DBA.** This means that using a Google Sheet, Excel file, or CSV as the source-of-truth is heavily recommended in early stages. Eventually a full-fledge backend backed by a relational database makes sense, but especially in phase 1 that's overkill. Prove usefulness before we build cool features.
+5. **App data maintainence is currently slated to be a PFA responsibility.** That likely requires them assigning someone (perhaps Michael Durkin, perhaps someone else) to call listed agencies and update the data based on what they say. (Long-term, that could shift) but for now plan on that.
 
 # Code Matters
 
-What languages and libraries does this use?
+What languages and libraries does this use? That's for the technical lead to decide.
