@@ -49,4 +49,4 @@ This is not doing outreach in the community beyond the proposed role of helping 
 
 # Code Matters
 
-What languages and libraries does this use? That's for the technical lead to decide.
+What languages and libraries does this use? **That's for the technical lead to decide.** Will it be you?
