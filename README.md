@@ -14,10 +14,11 @@ The idea here is that there exists a lot of good services in the Fort Collins ar
 
 So the goal of this project is mostly to offer an "app" to these firefighters that helps them know quickly which services are offered. The idea is that it would serve as a quick "wizard" where they can answer a few questions (order and qualifying question order is approximate here and will change): 
 
-1. Is this person... needing food assistance?
-1. Is this person... a resident? 
-2. Is this person... an adult?
-3. Is this person... a veteran? 
+1. *Is this person...* needing food assistance?
+1. *Is this person...* needing groceries?
+1. *Is this person...* a resident? 
+2. *Is this person...* an adult?
+3. *Is this person...* a veteran? 
 9. *Here are the three listings* -- want to call them?
 
 ## Possible Stretch Goals
