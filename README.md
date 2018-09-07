@@ -2,7 +2,7 @@
 
 ## Slack Channel
 
-#p-fd-servicedirectory ()
+#p-fd-servicedirectory
 
 ## Project Status
 
