@@ -1,4 +1,4 @@
-# [Name Undecided] PFA Service Directory #fd-helpwizard
+# [Name Undecided] PFA Service Directory (#p-fd-servicedirectory in Slack)
 
 ## Project Status
 
