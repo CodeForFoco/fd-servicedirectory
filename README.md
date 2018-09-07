@@ -1,4 +1,8 @@
-# [Name Undecided] PFA Service Directory (#p-fd-servicedirectory in Slack)
+# [Name Undecided] PFA Service Directory
+
+## Slack Channel
+
+#p-fd-servicedirectory ()
 
 ## Project Status
 
