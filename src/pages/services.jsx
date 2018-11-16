@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import api from "../core/api";
 import { getSheetData, normalizeServices } from "../core/utils";
 import { Link } from "react-router-dom";
+import { parse } from "query-string";
+import { areAllFiltersSet } from "../core/filters";
+import EligibilityWizard from "../components/eligibility-wizard";
 
 class Categories extends Component {
   state = {
@@ -22,10 +25,17 @@ class Categories extends Component {
 
   render() {
     const { services, isLoading } = this.state;
-    const { match } = this.props;
+    const { match, location } = this.props;
+    const appliedFilters = parse(location.search);
+
+    if (!areAllFiltersSet(appliedFilters)) {
+      return <EligibilityWizard appliedFilters={appliedFilters} />;
+    }
+
     if (isLoading) {
       return <p>Loading...</p>;
     }
+
     return (
       <article>
         <ul>

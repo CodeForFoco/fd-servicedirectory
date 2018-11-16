@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "prettier": "^1.15.2",
+    "query-string": "^6.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
