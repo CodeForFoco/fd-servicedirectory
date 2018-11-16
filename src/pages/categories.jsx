@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import api from "../core/api";
 import { getSheetData, slugifyCategory } from "../core/utils";
 import { Link } from "react-router-dom";
+import Box from "../components/box";
 
 class Categories extends Component {
   state = {
@@ -33,17 +34,15 @@ class Categories extends Component {
     }
     return (
       <article>
-        <ul>
-          {categories.map(category => {
-            // Convert a pretty category name to a uri slug
-            const uri = slugifyCategory(category);
-            return (
-              <li key={uri}>
-                <Link to={`/${uri}`}>{category}</Link>
-              </li>
-            );
-          })}
-        </ul>
+        {categories.map(category => {
+          // Convert a pretty category name to a uri slug
+          const uri = slugifyCategory(category);
+          return (
+            <Box key={uri}>
+              <Link to={`/${uri}`}>{category}</Link>
+            </Box>
+          );
+        })}
       </article>
     );
   }
