@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../core/api";
 import { getSheetData, slugifyCategory } from "../core/utils";
-import { Link } from "react-router-dom";
+import { Link } from "@reach/router";
 import Box from "../components/box";
 
 class Categories extends Component {

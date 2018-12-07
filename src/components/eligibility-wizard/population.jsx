@@ -1,17 +1,22 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import { stringify } from "query-string";
+import { navigate } from "@reach/router";
 
 class PopulationFilter extends Component {
   state = {
     selectedPopulations: [],
-    toNextStep: false,
   };
 
   applyFilter = () => {
-    this.setState({
-      toNextStep: true,
-    });
+    const { appliedFilters } = this.props;
+    const { selectedPopulations } = this.state;
+
+    navigate(
+      `?${stringify({
+        ...appliedFilters,
+        population: selectedPopulations,
+      })}`
+    );
   };
 
   togglePopulation = e => {
@@ -37,22 +42,7 @@ class PopulationFilter extends Component {
   };
 
   render() {
-    const { appliedFilters } = this.props;
-    const { selectedPopulations, toNextStep } = this.state;
-
-    if (toNextStep) {
-      return (
-        <Redirect
-          push
-          to={{
-            search: stringify({
-              ...appliedFilters,
-              population: selectedPopulations,
-            }),
-          }}
-        />
-      );
-    }
+    const { selectedPopulations } = this.state;
 
     return (
       <article>

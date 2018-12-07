@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@reach/router";
 import { stringify } from "query-string";
 
 const IdFilter = ({ appliedFilters }) => {
@@ -7,10 +7,10 @@ const IdFilter = ({ appliedFilters }) => {
     <article>
       <h1>Does this person have a valid ID?</h1>
       <nav>
-        <Link to={{ search: stringify({ ...appliedFilters, hasId: true }) }}>
+        <Link to={`?${stringify({ ...appliedFilters, hasId: true })}`}>
           Yes
         </Link>
-        <Link to={{ search: stringify({ ...appliedFilters, hasId: false }) }}>
+        <Link to={`?${stringify({ ...appliedFilters, hasId: false })}`}>
           No
         </Link>
       </nav>

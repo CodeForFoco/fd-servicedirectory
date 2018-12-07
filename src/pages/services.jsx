@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../core/api";
 import { getSheetData, normalizeServices } from "../core/utils";
-import { Link } from "react-router-dom";
+import { Link } from "@reach/router";
 import { parse } from "query-string";
 import { areAllFiltersSet } from "../core/filters";
 import EligibilityWizard from "../components/eligibility-wizard";
@@ -14,7 +14,7 @@ class Categories extends Component {
 
   async componentDidMount() {
     // Fetch the sheet  matching the service type id and pull out the values
-    const res = await api.getSheetByTitle(this.props.match.params.typeId);
+    const res = await api.getSheetByTitle(this.props.typeId);
     const rawSheetData = getSheetData(res.data);
     const services = normalizeServices(rawSheetData);
     this.setState({
@@ -25,7 +25,7 @@ class Categories extends Component {
 
   render() {
     const { services, isLoading } = this.state;
-    const { match, location } = this.props;
+    const { uri, location } = this.props;
     const appliedFilters = parse(location.search);
 
     if (!areAllFiltersSet(appliedFilters)) {
@@ -41,7 +41,7 @@ class Categories extends Component {
         <ul>
           {services.map(service => (
             <li key={service.id}>
-              <Link to={`${match.url}/${service.id}`}>{service.name}</Link>
+              <Link to={`${uri}/${service.id}`}>{service.name}</Link>
               <p>{service.address}</p>
             </li>
           ))}

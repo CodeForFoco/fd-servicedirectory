@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../core/api";
 import { getSheetData, slugifyCategory } from "../core/utils";
-import { Link } from "react-router-dom";
+import { Link } from "@reach/router";
 
 class Categories extends Component {
   state = {
@@ -21,9 +21,9 @@ class Categories extends Component {
         name: row[1],
         slug: row[2],
       }))
-      .filter(
-        service => service.category === this.props.match.params.categoryId
-      );
+      .filter(service => service.category === this.props.categoryId);
+
+    console.log("props", this.props);
 
     this.setState({
       isLoading: false,
@@ -32,8 +32,8 @@ class Categories extends Component {
   }
 
   render() {
-		const { serviceTypes, isLoading } = this.state;
-		const { match } = this.props;
+    const { serviceTypes, isLoading } = this.state;
+    const { uri } = this.props;
     if (isLoading) {
       return <p>Loading...</p>;
     }
@@ -42,7 +42,7 @@ class Categories extends Component {
         <ul>
           {serviceTypes.map(type => (
             <li key={type.slug}>
-              <Link to={`${match.url}/${type.slug}`}>{type.name}</Link>
+              <Link to={`${uri}/${type.slug}`}>{type.name}</Link>
             </li>
           ))}
         </ul>

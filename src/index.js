@@ -1,12 +1,15 @@
 import React from "react";
 import { render } from "react-dom";
 import styled, { createGlobalStyle } from "styled-components";
+import { normalize } from "polished";
 import Categories from "./pages/categories";
 import ServiceTypes from "./pages/service-types";
 import Services from "./pages/services";
 import ServiceDetail from "./pages/service-detail";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router } from "@reach/router";
 import Navigation from "./components/nav";
+
+const Normalize = createGlobalStyle`${normalize()}`;
 
 const GlobalStyle = createGlobalStyle({
   html: {
@@ -14,31 +17,44 @@ const GlobalStyle = createGlobalStyle({
       '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     boxSizing: "border-box",
   },
+  "*, *:before, *:after": {
+    boxSizing: "inherit",
+  },
 });
 
-const Container = styled.main({});
+const Container = styled.main({
+  background: "#C5CBD7",
+  display: "grid",
+  grid: `
+		"content" 1fr
+		"navigation" auto
+	`,
+  height: "100vh",
+});
 
-const PageWrapper = styled.article({});
+const PageWrapper = styled.article({
+  gridArea: "content",
+  margin: "0.5rem",
+});
+
+const NavigationWrapper = styled(Navigation)({
+  gridArea: "navigation",
+});
 
 const App = () => (
-  <h1>
-    <BrowserRouter>
-      <Container>
-        <PageWrapper>
-          <GlobalStyle />
-          <Route exact path="/" component={Categories} />
-          <Route exact path="/:categoryId" component={ServiceTypes} />
-          <Route exact path="/:categoryId/:typeId" component={Services} />
-          <Route
-            exact
-            path="/:categoryId/:typeId/:serviceId"
-            component={ServiceDetail}
-          />
-        </PageWrapper>
-        <Navigation />
-      </Container>
-    </BrowserRouter>
-  </h1>
+  <Container>
+    <GlobalStyle />
+    <Normalize />
+    <PageWrapper>
+      <Router>
+        <Categories path="/" />
+        <ServiceTypes path="/:categoryId" />
+        <Services path="/:categoryId/:typeId" />
+        <ServiceDetail path="/:categoryId/:typeId/:serviceId" />
+      </Router>
+    </PageWrapper>
+    <NavigationWrapper />
+  </Container>
 );
 
 render(<App />, document.getElementById("root"));
