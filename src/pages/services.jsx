@@ -3,6 +3,7 @@ import api from "../core/api";
 import { getSheetData, normalizeServices } from "../core/utils";
 import { Link } from "@reach/router";
 import { parse } from "query-string";
+import Box from "../components/box";
 import { areAllFiltersSet } from "../core/filters";
 import EligibilityWizard from "../components/eligibility-wizard";
 
@@ -29,7 +30,11 @@ class Categories extends Component {
     const appliedFilters = parse(location.search);
 
     if (!areAllFiltersSet(appliedFilters)) {
-      return <EligibilityWizard appliedFilters={appliedFilters} />;
+      return (
+        <Box>
+          <EligibilityWizard appliedFilters={appliedFilters} />
+        </Box>
+      );
     }
 
     if (isLoading) {

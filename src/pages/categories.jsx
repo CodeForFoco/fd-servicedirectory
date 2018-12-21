@@ -1,8 +1,15 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import api from "../core/api";
 import { getSheetData, slugifyCategory } from "../core/utils";
 import { Link } from "@reach/router";
 import Box from "../components/box";
+import Logo from "../assets/logo.png";
+
+const Logomark = styled.img({
+  margin: "auto",
+  width: "70%",
+});
 
 class Categories extends Component {
   state = {
@@ -34,6 +41,7 @@ class Categories extends Component {
     }
     return (
       <article>
+        <Logomark src={Logo} alt="Poudre Fire Authority" />
         {categories.map(category => {
           // Convert a pretty category name to a uri slug
           const uri = slugifyCategory(category);

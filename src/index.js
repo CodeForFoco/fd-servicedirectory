@@ -20,10 +20,13 @@ const GlobalStyle = createGlobalStyle({
   "*, *:before, *:after": {
     boxSizing: "inherit",
   },
+  a: {
+    textDecoration: "none",
+  },
 });
 
 const Container = styled.main({
-  background: "#C5CBD7",
+  background: "#fff",
   display: "grid",
   grid: `
 		"content" 1fr
