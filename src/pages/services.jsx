@@ -7,7 +7,7 @@ import Box from "../components/box";
 import { areAllFiltersSet } from "../core/filters";
 import EligibilityWizard from "../components/eligibility-wizard";
 
-class Categories extends Component {
+class Services extends Component {
   state = {
     isLoading: true,
     services: [],
@@ -28,11 +28,12 @@ class Categories extends Component {
     const { services, isLoading } = this.state;
     const { uri, location } = this.props;
     const appliedFilters = parse(location.search);
-
     if (!areAllFiltersSet(appliedFilters)) {
       return (
         <Box>
           <EligibilityWizard appliedFilters={appliedFilters} />
+          <br></br>
+          <Link to={`${uri}?hasId=true&income=true&lowIncome=true&population=Caregivers&residency=true`}>Show All Now</Link>
         </Box>
       );
     }
@@ -56,4 +57,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+export default Services;

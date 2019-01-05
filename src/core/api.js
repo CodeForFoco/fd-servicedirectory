@@ -8,6 +8,17 @@ const client = axios.create({
   params: { key: API_KEY },
 });
 
+const getSheetByTitle = async title => {
+  const res = await client.get("values:batchGet", {
+    params: {
+      majorDimension: "ROWS",
+      ranges: title,
+    },
+  });
+
+  return res;
+};
+
 export default {
   getSpreadsheet: () => client.get(""),
   getSheetByTitle: title =>
@@ -17,4 +28,17 @@ export default {
         ranges: title,
       },
     }),
+  getServiceByID: async (typeId, serviceId) => {
+    const sheet = await getSheetByTitle(typeId);
+    const rows = sheet.data.valueRanges[0].values;
+
+    const res = {};
+    const headers = rows[0];
+    //find the individual service row
+    const service = rows.filter(row => row[0] === serviceId);
+
+    //create response object with header key: value pairs
+    headers.map((heading, index) => (res[heading] = service[0][index]));
+    return res;
+  },
 };

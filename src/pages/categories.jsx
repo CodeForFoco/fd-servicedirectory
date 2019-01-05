@@ -21,7 +21,6 @@ class Categories extends Component {
     // Fetch the Index sheet and pull out the values
     const res = await api.getSheetByTitle("Index");
     const rawSheetData = getSheetData(res.data);
-
     // Grab the categories from each row
     const categories = rawSheetData.map(row => row[0]);
 

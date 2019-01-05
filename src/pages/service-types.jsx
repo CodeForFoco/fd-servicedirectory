@@ -3,7 +3,7 @@ import api from "../core/api";
 import { getSheetData, slugifyCategory } from "../core/utils";
 import { Link } from "@reach/router";
 
-class Categories extends Component {
+class ServiceTypes extends Component {
   state = {
     isLoading: true,
     serviceTypes: [],
@@ -51,4 +51,4 @@ class Categories extends Component {
   }
 }
 
-export default Categories;
+export default ServiceTypes;
