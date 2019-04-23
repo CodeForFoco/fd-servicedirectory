@@ -1,0 +1,9 @@
+{
+  "name": "fd-servicedirectory",
+  "version": "1.0.0",
+  "description": "PFA Service Directory",
+  "main": "src/index.jsx",
+  "repository": "git@github.com:CodeForFoco/fd-servicedirectory.git",
+  "author": "Code for Fort Collins",
+  "license": "MIT"
+}
