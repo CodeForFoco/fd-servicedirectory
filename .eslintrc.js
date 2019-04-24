@@ -1,9 +1,9 @@
 module.exports = {
-	env: {
+  env: {
     browser: true,
     es6: true,
-		jest: true,
-	}
+    jest: true,
+  },
   extends: [
     'eslint:recommended',
     'plugin:jsx-a11y/recommended',
