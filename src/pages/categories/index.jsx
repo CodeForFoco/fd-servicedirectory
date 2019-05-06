@@ -1,7 +1,7 @@
 import React from "react";
 
 const Categories = ({ match }) => {
-  return null;
+  return <p>Categories</p>;
 };
 
 export default Categories;
