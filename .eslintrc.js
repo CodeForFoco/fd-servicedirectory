@@ -15,7 +15,6 @@ module.exports = {
   rules: {
 		'prettier/prettier': [2, { trailingComma: 'es5' }],
 		"react/prop-types": 0,
-    'react-hooks/exhaustive-deps': 1,
     'react-hooks/rules-of-hooks': 2,
   },
 };
