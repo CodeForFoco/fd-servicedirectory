@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Icon from "../icon";
+import Icon from "~/components/icon";
 
 const Link = styled(NavLink)({
   textAlign: "center",
-  width: "72px",
+  width: "80px",
   color: "#565C65",
   textDecoration: "none",
   "&.isActive": {
