@@ -9,7 +9,7 @@ const StyledLink = styled(Link)({
 });
 
 const Title = styled(B1)({
-  color: "#000",
+  color: "#1B1B1B",
   display: "block",
 });
 
