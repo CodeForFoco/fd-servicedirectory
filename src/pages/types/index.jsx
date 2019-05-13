@@ -5,15 +5,17 @@ import TitleBar from "~/components/title-bar";
 import { useAPI } from "~/core/api";
 import TypeCard from "./type-card";
 
-const TopBar = styled(TitleBar)({});
+const TopBar = styled(TitleBar)({
+  background: "#F8F9FB",
+  position: "fixed",
+  top: 0,
+  width: "100%",
+});
 
 const TypesList = styled.ul({
-  height: "calc(100vh - 160px)",
   listStyle: "none",
-  margin: 0,
+  margin: "104px 0",
   padding: "16px",
-  overflowY: "scroll",
-  webkitOverflowScrolling: "touch",
 });
 
 const Types = ({ match }) => {

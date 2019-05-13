@@ -1,18 +1,11 @@
 import { uniqBy } from "lodash";
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
 import { H1 } from "~/components/typography";
 import { useAPI } from "~/core/api";
 import CategoryCard from "./category-card";
-
-const Container = styled.article({
-  gridRowStart: 1,
-  gridRowEnd: 3,
-  height: "calc(100vh - 80px)",
-  overflowY: "auto",
-});
 
 const StyledLogo = styled(Logo)({
   margin: "48px auto",
@@ -53,7 +46,7 @@ const Categories = () => {
     );
 
   return (
-    <Container>
+    <Fragment>
       <StyledLogo />
       <IntroText>Pick a category to see services in your area.</IntroText>
       {loading ? (
@@ -72,7 +65,7 @@ const Categories = () => {
           ))}
         </CategoryList>
       )}
-    </Container>
+    </Fragment>
   );
 };
 
