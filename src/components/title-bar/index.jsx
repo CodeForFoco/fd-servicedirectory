@@ -6,10 +6,13 @@ import { B1 } from "~/components/typography";
 
 const Container = styled.nav({
   alignItems: "center",
+  background: "#F8F9FB",
   display: "flex",
   height: "48px",
   justifyContent: "center",
+  position: "fixed",
   top: 0,
+  width: "100%",
 });
 
 const BackLink = styled(Link)({

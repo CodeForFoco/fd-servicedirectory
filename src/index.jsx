@@ -8,6 +8,7 @@ import theme from "~/core/theme";
 import Categories from "~/pages/categories";
 import Help from "~/pages/help";
 import Search from "~/pages/search";
+import Services from "~/pages/services";
 import Types from "~/pages/types";
 
 const GlobalStyles = createGlobalStyle`
@@ -27,6 +28,11 @@ const App = () => (
         <Route exact path="/search" component={Search} />
         <Route exact path="/categories" component={Categories} />
         <Route exact path="/categories/:categoryId" component={Types} />
+        <Route
+          exact
+          path="/categories/:categoryId/:typeId"
+          component={Services}
+        />
         <Route exact path="/help" component={Help} />
       </Switch>
       <Nav />

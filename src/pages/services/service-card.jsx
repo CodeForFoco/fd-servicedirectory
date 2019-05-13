@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Box from "~/components/box";
+import PhysicalInfo from "~/components/physical-info";
+import Requirements from "~/components/requirements";
 import { B1, P2 } from "~/components/typography";
 
 const StyledLink = styled(Link)({
@@ -22,13 +24,19 @@ const Description = styled(P2)({
   color: "#696C72",
 });
 
-const TypeCard = ({ description, link, title }) => (
+const ServiceCard = ({ link, service }) => (
   <StyledLink to={link}>
     <Container as="li">
-      <Title>{title}</Title>
-      <Description>{description}</Description>
+      <Title>{service.title}</Title>
+      <Description>{service.description}</Description>
+      <PhysicalInfo address={service.address} hours={service.hours} />
+      <Requirements
+        isCompact
+        requirements={service.requirements}
+        populations={service.populations}
+      />
     </Container>
   </StyledLink>
 );
 
-export default TypeCard;
+export default ServiceCard;

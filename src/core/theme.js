@@ -7,5 +7,7 @@ export default {
     waterDark: "#064B8D",
     water: "#6881EC",
     waterLight: "#EEF1FD",
+    fire: "#F74A8F",
+    fireLight: "#FEEEF4",
   },
 };

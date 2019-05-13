@@ -5,17 +5,10 @@ import TitleBar from "~/components/title-bar";
 import { useAPI } from "~/core/api";
 import TypeCard from "./type-card";
 
-const TopBar = styled(TitleBar)({
-  background: "#F8F9FB",
-  position: "fixed",
-  top: 0,
-  width: "100%",
-});
-
 const TypesList = styled.ul({
   listStyle: "none",
-  margin: "104px 0",
-  padding: "16px",
+  margin: "72px 0 104px 0",
+  padding: "0 16px",
 });
 
 const Types = ({ match }) => {
@@ -49,13 +42,13 @@ const Types = ({ match }) => {
 
   return (
     <Fragment>
-      <TopBar backLink="/categories" title={currentCategory} />
+      <TitleBar backLink="/categories" title={currentCategory} />
       <TypesList>
         {types.map(t => (
           <TypeCard
             description={t.description}
             key={t.slug}
-            link={t.slug}
+            link={`/categories/${categoryId}/${t.slug}`}
             title={t.title}
           />
         ))}
