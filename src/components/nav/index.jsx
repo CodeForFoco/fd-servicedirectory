@@ -7,7 +7,6 @@ const Container = styled.nav({
   background: "#FFF",
   boxShadow: "0 4px 12px rgba(0,0,0,0.1);",
   display: "flex",
-  gridArea: "nav",
   justifyContent: "space-evenly",
 });
 
