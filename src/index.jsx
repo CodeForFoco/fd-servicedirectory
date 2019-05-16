@@ -9,6 +9,7 @@ import Categories from "~/pages/categories";
 import Help from "~/pages/help";
 import Search from "~/pages/search";
 import Services from "~/pages/services";
+import ServiceDetail from "~/pages/service-detail";
 import Types from "~/pages/types";
 
 const GlobalStyles = createGlobalStyle`
@@ -32,6 +33,11 @@ const App = () => (
           exact
           path="/categories/:categoryId/:typeId"
           component={Services}
+        />
+        <Route
+          exact
+          path="/categories/:categoryId/:typeId/:serviceId"
+          component={ServiceDetail}
         />
         <Route exact path="/help" component={Help} />
       </Switch>

@@ -2,15 +2,16 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import Divider from "~/components/divider";
 import Token from "~/components/token";
+import { B2 } from "~/components/typography";
 import { formatListAsSentence, getRequirementName } from "~/core/utils";
 
-const List = styled.ul({
+const List = styled.ul(({ isCompact }) => ({
   display: "flex",
   flexWrap: "wrap",
   listStyle: "none",
-  margin: 0,
+  margin: isCompact ? 0 : "8px 0 0 0",
   padding: 0,
-});
+}));
 
 const Item = styled(Token).attrs({
   as: "li",
@@ -46,7 +47,8 @@ const Requirements = ({ isCompact, populations, requirements }) => {
   return (
     <Fragment>
       <Divider />
-      <List>
+      {!isCompact && <B2>Requirements:</B2>}
+      <List isCompact={isCompact}>
         {visibleRequirements.map(r => {
           const color = r === "appointment" ? "fire" : "water";
           return (
