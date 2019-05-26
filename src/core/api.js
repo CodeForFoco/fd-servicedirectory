@@ -3,7 +3,7 @@ import { useEffect, useReducer } from "react";
 import { getSheetData } from "./utils";
 
 const SHEET_ID = "1ZPRRR8T51Tk-Co8h_GBh3G_7P2F7ZrYxPQDSYycpCUg";
-const API_KEY = "AIzaSyAjr82kfm5EIBgCTb5H3AE7tzGkBOBe1yo";
+const API_KEY = process.env.GOOGLE_API_KEY;
 
 const client = axios.create({
   baseURL: `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/`,
