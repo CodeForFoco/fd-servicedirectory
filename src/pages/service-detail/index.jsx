@@ -1,32 +1,39 @@
-import React, { Fragment } from 'react';
-import styled from 'styled-components';
-import Box from '~/components/box';
-import Divider from '~/components/divider';
-import Loader from '~/components/loader';
-import PhysicalInfo from '~/components/physical-info';
-import Requirements from '~/components/requirements';
-import TitleBar from '~/components/title-bar';
-import { P1, P2 } from '~/components/typography';
-import { useAPI } from '~/core/api';
-import { formatService } from '~/core/utils';
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import Box from "~/components/box";
+import Button from "~/components/button";
+import Divider from "~/components/divider";
+import Loader from "~/components/loader";
+import PhysicalInfo from "~/components/physical-info";
+import Requirements from "~/components/requirements";
+import TitleBar from "~/components/title-bar";
+import { P1, P2 } from "~/components/typography";
+import { useAPI } from "~/core/api";
+import { formatPhoneNumber, formatService } from "~/core/utils";
 
 const ServiceCard = styled(Box)({
-  margin: '72px 16px 104px 16px',
+  margin: "72px 16px 104px 16px",
 });
 
 const Description = styled(P1)({
-  color: '#44474F',
+  color: "#44474F",
 });
 
 const OtherInfo = styled(P2)({
-  color: '#44474F',
+  color: "#44474F",
+});
+
+const PhoneLink = styled.a({
+  display: "block",
+  margin: "8px 0 16px 0",
+  textDecoration: "none",
 });
 
 const ServiceDetail = ({ match }) => {
   const { categoryId, serviceId, typeId } = match.params;
 
-  const { loading, error, data } = useAPI('values:batchGet', {
-    params: { majorDimension: 'ROWS', ranges: typeId },
+  const { loading, error, data } = useAPI("values:batchGet", {
+    params: { majorDimension: "ROWS", ranges: typeId },
   });
 
   if (loading) {
@@ -60,6 +67,11 @@ const ServiceDetail = ({ match }) => {
           requirements={service.requirements}
           populations={service.populations}
         />
+        {service.phone !== "" && (
+          <PhoneLink href={`tel:${service.phone}`}>
+            <Button>{formatPhoneNumber(service.phone)}</Button>
+          </PhoneLink>
+        )}
         {service.otherInfo && (
           <Fragment>
             <Divider />

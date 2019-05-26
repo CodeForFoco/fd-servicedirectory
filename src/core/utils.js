@@ -55,3 +55,9 @@ export const formatListAsSentence = items => {
   const last = newArr.pop();
   return newArr.join(", ") + " & " + last;
 };
+
+// Formats a phone number. `970-555-1234` -> `(970) 555-1234`
+export const formatPhoneNumber = phone => {
+  const [areaCode, prefix, suffix] = phone.split("-");
+  return `(${areaCode}) ${prefix}-${suffix}`;
+};
