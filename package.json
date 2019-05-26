@@ -8,9 +8,14 @@
 	"license": "MIT",
 	"scripts": {
 		"develop": "parcel src/index.html",
+		"build": "parcel build src/index.html",
 		"lint": "eslint src/ --ext .jsx,.js",
-		"test": "jest src/ --verbose"
+		"test": "jest src/ --verbose",
+		"heroku-postbuild": "yarn build"
 	},
+	"browserslist": [
+		"last 2 Chrome versions"
+	],
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
 		"@babel/preset-env": "^7.4.3",
@@ -28,8 +33,13 @@
 		"prettier": "^1.17.0"
 	},
 	"dependencies": {
+		"axios": "^0.18.0",
+		"lodash": "^4.17.11",
+		"polished": "^3.3.0",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
-		"react-router-dom": "^5.0.0"
+		"react-router-dom": "^5.0.0",
+		"styled-components": "^4.2.0",
+		"styled-normalize": "^8.0.6"
 	}
 }

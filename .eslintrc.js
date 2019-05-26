@@ -2,7 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    jest: true,
+		jest: true,
+		node: true,
   },
   extends: [
     'eslint:recommended',
@@ -15,7 +16,6 @@ module.exports = {
   rules: {
 		'prettier/prettier': [2, { trailingComma: 'es5' }],
 		"react/prop-types": 0,
-    'react-hooks/exhaustive-deps': 1,
     'react-hooks/rules-of-hooks': 2,
   },
 };
