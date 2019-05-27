@@ -8,7 +8,7 @@ import PhysicalInfo from "~/components/physical-info";
 import Requirements from "~/components/requirements";
 import TitleBar from "~/components/title-bar";
 import { P1, P2 } from "~/components/typography";
-import { useAPI } from "~/core/api";
+import api, { useAPI } from "~/core/api";
 import { formatPhoneNumber, formatService } from "~/core/utils";
 
 const ServiceCard = styled(Box)({
@@ -32,9 +32,7 @@ const PhoneLink = styled.a({
 const ServiceDetail = ({ match }) => {
   const { categoryId, serviceId, typeId } = match.params;
 
-  const { loading, error, data } = useAPI("values:batchGet", {
-    params: { majorDimension: "ROWS", ranges: typeId },
-  });
+  const { loading, error, data } = useAPI(api.getServicesByType, typeId);
 
   if (loading) {
     return <Loader />;
