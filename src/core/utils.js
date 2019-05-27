@@ -53,7 +53,7 @@ export const formatListAsSentence = items => {
   // Duplicate the array
   const newArr = [...items];
   const last = newArr.pop();
-  return newArr.join(", ") + " & " + last;
+  return newArr.join(", ") + ", & " + last;
 };
 
 // Formats a phone number. `970-555-1234` -> `(970) 555-1234`
