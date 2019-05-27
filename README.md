@@ -6,23 +6,23 @@
 
 ## Project Status
 
-Ready-to-prototype
+In progress
 
 ## Project Leaders
 
-Michael Durkin (PFA), David Hayes (CFFC), you?
+Michael Durkin (PFA), David Hayes (CFFC), Eric Skram (CFFC)
 
 ## Project Goals
 
-There exist a lot of good services in the Fort Collins area, offered by governments, NGOs, etc. And Poudre Fire Authority fire fighters (in their roles beyond putting out fires) are often on the front-lines of community interaction. But few of the fire fighters actually know a lot about the services on offer. They often wish that they could help people more when leaving their community interactions. For example: they may be called to help a currently-homeless person outside on a cold night, but not know where a warm shelter is. Or they may be called to someone whose house is cold (but housed) in winter, but not be able fix a broken heater. But a service might exist for that use. 
+There exist a lot of good services in the Fort Collins area, offered by governments, NGOs, etc. And Poudre Fire Authority fire fighters (in their roles beyond putting out fires) are often on the front-lines of community interaction. But few of the fire fighters actually know a lot about the services on offer. They often wish that they could help people more when leaving their community interactions. For example: they may be called to help a currently-homeless person outside on a cold night, but not know where a warm shelter is. Or they may be called to someone whose house is cold (but housed) in winter, but not be able fix a broken heater. But a service might exist for that use.
 
-So the goal of this project is mostly to offer an "app" to these firefighters that helps them know quickly which services are offered. The idea is that it would serve as a quick "wizard" where they can answer a few questions (order and qualifying question text is approximate here and will change): 
+So the goal of this project is mostly to offer an "app" to these firefighters that helps them know quickly which services are offered. The idea is that it would serve as a quick "wizard" where they can answer a few questions (order and qualifying question text is approximate here and will change):
 
 1. *Is this person...* needing food assistance?
 1. *Is this person...* needing groceries?
-1. *Is this person...* a resident? 
+1. *Is this person...* a resident?
 2. *Is this person...* an adult?
-3. *Is this person...* a veteran? 
+3. *Is this person...* a veteran?
 9. *Here are the three listings* -- want to call them?
 
 ## Possible Stretch Goals
@@ -31,11 +31,11 @@ Our first project will certainly be to empower out fire-men and -women to better
 
 ## Non-goals (thing we explicitly do not intend to do)
 
-This is not a service (e.g. hot meals) to be offered. 
+This is not a service (e.g. hot meals) to be offered.
 
-This is not (currently) a public website. 
+This is not (currently) a public website.
 
-This is not replacing services like 211. 
+This is not replacing services like 211.
 
 This is not doing outreach in the community beyond the proposed role of helping firefighters in the calls they already service.
 
@@ -64,6 +64,39 @@ Future steps could include:
 4. Creating an admin interface for PFA (and partner agencies?) to keep data up-to-date intelligently
 4. Sharing our application code with others to use in their local area
 
-## Code Details
+# Getting started
 
-What languages and libraries does this project use? **That's for the technical lead to decide.** Will it be you?
+Follow these instructions to get the app up and running locally.
+
+## Prerequisites
+
+* [Node](https://nodejs.org/en/download)
+* [Yarn](https://yarnpkg.com/en/docs/install)
+
+## Contributing
+
+1. Find some issue you're interested in, or a feature that you'd like to tackle.
+2. Fork, then clone: `git@github.com:CodeForFoco/fd-servicedirectory.git`
+3. Create a branch with a meaningful name for the issue: `git checkout -b fix-something`
+4. Install packages by running `yarn` in the project root.
+5. Create a [`.env`](https://github.com/motdotla/dotenv) file in the project root and paste in your `GOOGLE_API_KEY`. Speak to a project maintainer and they'll get you one.
+5. Start the development server by running `yarn develop` and navigate to `http://localhost:1234`.
+6. Make your changes and ensure that:
+	* All tests still pass by running `yarn test`
+	* All code follows formatting guidelines by running `yarn lint`
+7. Commit your code and push to your forked branch.
+8. Submit a Pull Request to the CodeForFoco repository with a clear title and description of your changes.
+9. Wait for a maintainer to review your PR, make changes if necessary, and get it merged!
+
+## Tech Stack
+
+The PFA Service Directory is a Javascript application built using [React](https://reactjs.org). Under the hood, it also uses the following technologies:
+
+### Tooling
+* [Eslint](https://eslint.org) and [Prettier](https://prettier.io) for code formatting 📝
+* [Jest](https://jestjs.io) for unit testing ✅
+* [Parcel](https://parceljs.org) for module bundling and development 📦
+
+### Frontend Packages
+* [React Router](https://github.com/ReactTraining/react-router) for frontend routing 🚦
+* [Styled Components](https://github.com/styled-components/styled-components) for styling 💅
