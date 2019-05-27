@@ -28,24 +28,22 @@ test("formatService", () => {
       lowIncome: true,
     }
   };
-  let formatted = utils.formatService(service);
-  Object.keys(formatted.requirements).forEach(key => {
-    expect(formatted.requirements[key]).toBe(expected.requirements[key]);
-  });
-  expect(formatted.populations).toEqual(expected.populations);
-  Object.keys(expected).forEach(key => {
-    if (key !== 'populations' && key !== 'requirements') {
-      expect(formatted[key]).toEqual(expected[key]);
-    }
-  });
+  expect(utils.formatService(service)).toEqual(expected);
 });
 
 test("getRequirementName", () => {
-  let compact = utils.getRequirementName({ name: 'id', format: 'compact' });
-  let expanded = utils.getRequirementName({ name: 'id', format: 'expanded' });
-  expect(compact).toBeTruthy();
-  expect(expanded).toBeTruthy();
-  expect(compact.length).toBeLessThan(expanded.length);
+  let expected = {
+    id: { expanded: "Valid ID", compact: "ID" },
+    residency: { expanded: "Proof of Residency", compact: "Residency" },
+    income: { expanded: "Proof of Income", compact: "Income" },
+    lowIncome: { expanded: "Proof of Low Income", compact: "Low Income" },
+    appointment: { expanded: "Appointment Required", compact: "Appointment" }
+  };
+
+  Object.keys(expected).forEach(key => {
+    expect(utils.getRequirementName({ name: key, format: 'expanded'})).toEqual(expected[key].expanded);
+    expect(utils.getRequirementName({ name: key, format: 'compact'})).toEqual(expected[key].compact);
+  });
 });
 
 test("formatListAsSentence", () => {
