@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
 import { H1 } from "~/components/typography";
-import { useAPI } from "~/core/api";
+import api, { useAPI } from "~/core/api";
 import CategoryCard from "./category-card";
 
 const StyledLogo = styled(Logo)({
@@ -24,9 +24,7 @@ const IntroText = styled(H1)({
 });
 
 const Categories = () => {
-  const { loading, error, data } = useAPI("values:batchGet", {
-    params: { majorDimension: "ROWS", ranges: "Index" },
-  });
+  const { loading, error, data } = useAPI(api.getIndex);
 
   if (error) {
     return <p>Something went wrong!</p>;
