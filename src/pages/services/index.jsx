@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import Loader from "~/components/loader";
 import TitleBar from "~/components/title-bar";
-import { useAPI } from "~/core/api";
+import api, { useAPI } from "~/core/api";
 import { formatService } from "~/core/utils";
 import ServiceCard from "./service-card";
 
@@ -15,9 +15,7 @@ const ServicesList = styled.ul({
 const Services = ({ match }) => {
   const { categoryId, typeId } = match.params;
 
-  const { loading, error, data } = useAPI("values:batchGet", {
-    params: { majorDimension: "ROWS", ranges: typeId },
-  });
+  const { loading, error, data } = useAPI(api.getServicesByType, typeId);
 
   if (loading) {
     return <Loader />;
