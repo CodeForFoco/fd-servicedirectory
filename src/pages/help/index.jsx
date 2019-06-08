@@ -4,7 +4,7 @@ import { H1 } from "~/components/typography";
 import Logo from "~/components/logo";
 
 const HelpContainer = styled.div({
-  padding: "0px 16px"
+  padding: "0px 16px",
 });
 
 const StyledLogo = styled(Logo)({
@@ -18,52 +18,69 @@ const IntroText = styled(H1)({
 });
 
 const Li = styled.li({
-  textDecoration: "none"
+  textDecoration: "none",
 });
 
-const Help = ({ match }) => {
+const Help = () => {
   return (
     <Fragment>
-      <StyledLogo/>
-      <IntroText>
-        Pick an option for Help.
-      </IntroText>
+      <StyledLogo />
+      <IntroText>Pick an option for Help.</IntroText>
       <HelpContainer>
         <h2>Common Issues:</h2>
         <p>In the event of an emergency, call 911.</p>
         <ul>
           <Li>
-            <p><b>Service or Organization Infomation was incorrect.</b></p>
             <p>
-              Contact the Pourde Fire Authority to request adding a new service or organization.
+              <b>Service or Organization Infomation was incorrect.</b>
+            </p>
+            <p>
+              Contact the Pourde Fire Authority to request adding a new service
+              or organization.
             </p>
           </Li>
           <Li>
-            <p><b>I can't find a service or organization.</b></p>
-            <p>Try looking for the service or organization on the Home or Search page.
-              If you'd like to add a service or organization, see the issue below.
+            <p>
+              <b>I can&apos;t find a service or organization.</b>
+            </p>
+            <p>
+              Try looking for the service or organization on the Home or Search
+              page. If you&apos;d like to add a service or organization, see the
+              issue below.
             </p>
           </Li>
           <Li>
-            <p><b>How do I add a new Service or Organization?</b></p>
-            <p>Contact the Pourde Fire Authority to request adding a new service or organization.
+            <p>
+              <b>How do I add a new Service or Organization?</b>
+            </p>
+            <p>
+              Contact the Pourde Fire Authority to request adding a new service
+              or organization.
             </p>
           </Li>
           <Li>
-            <p><b>How do I report an issue?</b></p>
-            <p>Contact the Pourde Fire Authority regarding any issues you find.
+            <p>
+              <b>How do I report an issue?</b>
+            </p>
+            <p>
+              Contact the Pourde Fire Authority regarding any issues you find.
             </p>
           </Li>
           <Li>
-            <p><b>How do I request a feature?</b></p>
-            <p>Contact the Pourde Fire Authority regarding any feature requests.
+            <p>
+              <b>How do I request a feature?</b>
+            </p>
+            <p>
+              Contact the Pourde Fire Authority regarding any feature requests.
             </p>
           </Li>
         </ul>
-        <br/>
-        <p>To reach someone at PFA during business hours, 8 a.m. to 5 p.m. Monday through Friday, you may contact:</p>
-        <p>PFA's Administrative offices | 970-416-2892</p>
-
+        <br />
+        <p>
+          To reach someone at PFA during business hours, 8 a.m. to 5 p.m. Monday
+          through Friday, you may contact:
+        </p>
+        <p>PFA&apos;s Administrative offices | 970-416-2892</p>
       </HelpContainer>
     </Fragment>
   );
