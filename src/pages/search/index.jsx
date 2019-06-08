@@ -1,6 +1,4 @@
-import React from "react";
-
-const Search = ({ match }) => {
+const Search = () => {
   return null;
 };
 
