@@ -16,6 +16,18 @@
 	"browserslist": [
 		"last 2 Chrome versions"
 	],
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"*.{js,jsx}": [
+      "eslint --fix",
+      "git add",
+      "jest --bail --findRelatedTests --verbose"
+    ]
+	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
 		"@babel/preset-env": "^7.4.3",
@@ -29,11 +41,13 @@
 		"eslint-plugin-react": "^7.13.0",
 		"eslint-plugin-react-hooks": "^1.6.0",
 		"jest": "^24.7.1",
+		"lint-staged": "^8.2.0",
 		"parcel-bundler": "^1.12.3",
 		"prettier": "^1.18.2"
 	},
 	"dependencies": {
 		"axios": "0.18.1",
+		"husky": "^2.4.0",
 		"lodash": "^4.17.11",
 		"polished": "^3.3.0",
 		"qs": "^6.7.0",
