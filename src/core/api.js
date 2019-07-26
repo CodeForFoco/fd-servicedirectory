@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useReducer } from "react";
-import { getSheetData } from "./utils";
+import { getSheetData, formatService } from "./utils";
 import { stringify } from "qs";
+import { drop } from "lodash";
 
 const SHEET_ID = "1ZPRRR8T51Tk-Co8h_GBh3G_7P2F7ZrYxPQDSYycpCUg";
 const API_KEY = process.env.GOOGLE_API_KEY;
@@ -97,9 +98,11 @@ export default {
         return stringify(params, { indices: false });
       },
     });
-    const allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
-      return [...list, ...type.values];
-    }, []);
+    // Merge all the separate sheets and format the services
+    const allServices = allServicesRes.data.valueRanges
+      .reduce((list, type) => [...list, ...type.values], [])
+      .slice(1)
+      .map(formatService);
     return allServices;
   },
   // Returns the spreadsheet's index sheet
