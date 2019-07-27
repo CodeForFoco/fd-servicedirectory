@@ -1,8 +1,9 @@
 import { uniqBy } from "lodash";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
+import InputAndSubmit from "~/components/inputAndSubmit";
 import { H1 } from "~/components/typography";
 import api, { useAPI } from "~/core/api";
 
@@ -10,16 +11,16 @@ const StyledLogo = styled(Logo)({
   margin: "48px auto",
 });
 
-const CategoryList = styled.ul({
-  listStyle: "none",
-  margin: "40px 0 0 0",
-  padding: "16px",
-});
-
 const IntroText = styled(H1)({
   color: "#44474F",
   padding: "0 32px",
   textAlign: "center",
+});
+
+const AlignInput = styled.div({
+  display: "flex",
+  justifyContent: "center",
+  padding: "8px 16px"
 });
 
 // Transforms the data into usable objects and filter out duplicates
@@ -40,6 +41,10 @@ const query = new URLSearchParams(location.search);
 const Search = ({ match }) => {
   const { loading, error, data } = useAPI(api.getIndex);
 
+  const [state, setState] = useState({
+    searchValue: ""
+  });
+
   if (error) {
     return <p>Something went wrong!</p>;
   }
@@ -48,7 +53,16 @@ const Search = ({ match }) => {
     <Fragment>
       <StyledLogo />
       <IntroText>Search for a service.</IntroText>
-      {/*query.get('name')*/}
+      <AlignInput>
+        <InputAndSubmit
+          value={state.searchValue}
+          inputPlaceholder="Search for a service"
+          submitValue="Search"
+          setValue={(e) => {
+            setState({ searchValue: e.target.value });
+          }}
+        />
+      </AlignInput>
       {/*loading ? (
         <Loader />
       ) : (
