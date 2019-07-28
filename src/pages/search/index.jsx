@@ -1,4 +1,3 @@
-import { uniqBy } from "lodash";
 import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
@@ -23,23 +22,10 @@ const AlignInput = styled.div({
   padding: "8px 16px"
 });
 
-// Transforms the data into usable objects and filter out duplicates
-const getCategories = data =>
-  uniqBy(
-    data.map(d => ({
-      color: d[4],
-      description: d[2],
-      icon: d[3],
-      title: d[0],
-      slug: d[1],
-    })),
-    "label"
-  );
-
 const query = new URLSearchParams(location.search);
 
 const Search = ({ match }) => {
-  const { loading, error, data } = useAPI(api.getIndex);
+  const { loading, error, data } = useAPI(api.getAllServices);
 
   const [state, setState] = useState({
     searchValue: ""
@@ -63,11 +49,11 @@ const Search = ({ match }) => {
           }}
         />
       </AlignInput>
-      {/*loading ? (
+      {loading ? (
         <Loader />
       ) : (
         <p>{JSON.stringify(data)}</p>
-      )*/}
+      )}
     </Fragment>
   );
 };

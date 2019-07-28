@@ -87,16 +87,23 @@ export default {
   // Returns *all* services as a single array—for use in search
   getAllServices: async () => {
     const index = await getSheetByTitle("Index");
-    const types = getSheetData(index.data).map(row => row[6]);
+    // IMPORTANT: If a sheet name does not match the index, this throws an error.
+    // We need to check if a sheet exists before requesting it.
+    // The error I encounted as of writing this comment was pet-health did not match pet-animal-health
+    // so, I hacked it by replacing pet-health with pet-animal-health for now.
+    // THIS COULD CAUSE A BREAKING ERROR IN THE FUTURE, SO WE NEED TO ACCOUNT FOR THIS. 
+    let types = getSheetData(index.data).map(row => row[6]);
+    // Temporary hack
+    types[types.indexOf('pet-health')] = 'pet-animal-health';
     const allServicesRes = await client.get("values:batchGet", {
       params: {
         majorDimension: "ROWS",
-        ranges: types,
+        ranges: types
       },
       paramsSerializer: params => {
         return stringify(params, { indices: false });
       },
-    });
+  });
     const allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
       return [...list, ...type.values];
     }, []);
