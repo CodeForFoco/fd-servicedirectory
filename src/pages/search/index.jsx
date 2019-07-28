@@ -60,15 +60,16 @@ const queryServices = (data, query) => {
 const Search = ({ match }) => {
   const { loading, error, data } = useAPI(api.getAllServices);
   const index = useAPI(api.getIndex);
+  const urlQuery = new URLSearchParams(location.search);
 
-  const [searchValue, setSearchValue] = useState(new URLSearchParams(location.search).get("s") || "");
+  const [searchValue, setSearchValue] = useState(urlQuery.get("s") || "");
   const [searchResults, setSearchResults] = useState("");
 
   if (error || index.error) {
     return <p>Something went wrong!</p>;
   }
 
-  if (!loading && !index.loading && !searchResults && searchValue && searchValue !== '') {
+  if (!loading && !index.loading && !searchResults && urlQuery.get("s") && urlQuery.get("s") !== '') {
     setSearchResults(queryServices(data, searchValue));
   }
 
