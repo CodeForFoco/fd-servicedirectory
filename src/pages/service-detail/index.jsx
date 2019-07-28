@@ -29,6 +29,8 @@ const PhoneLink = styled.a({
   textDecoration: "none",
 });
 
+const urlQuery = new URLSearchParams(location.search);
+
 const ServiceDetail = ({ match }) => {
   const { categoryId, serviceId, typeId } = match.params;
 
@@ -55,7 +57,7 @@ const ServiceDetail = ({ match }) => {
   return (
     <Fragment>
       <TitleBar
-        backLink={`/categories/${categoryId}/${typeId}`}
+        backLink={new URLSearchParams(location.search).get("backLink") || `/categories/${categoryId}/${typeId}`}
         title={service.title}
       />
       <ServiceCard>

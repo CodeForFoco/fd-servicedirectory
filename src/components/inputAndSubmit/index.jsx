@@ -6,7 +6,8 @@ const InputWrapper = styled.div({
   background: "#fff",
   borderRadius: "8px",
   boxShadow: "0 4px 12px rgba(0,0,0,0.1);",
-  width: "100%"
+  width: "100%",
+  marginBottom: "8px"
 });
 
 const StyledInput = styled.input({
@@ -31,15 +32,16 @@ const StyledSubmit = styled.button({
   }
 });
 
-const InputAndSubmit = ({ value, setValue, inputPlaceholder, submitValue}) => {
+const InputAndSubmit = ({ value, setValue, inputPlaceholder, submitValue, handleSubmit }) => {
   return (
     <InputWrapper>
       <StyledInput
+        type="text"
         value={value} 
         placeholder={inputPlaceholder}
         onChange={setValue}
       />
-      <StyledSubmit>{submitValue || 'Submit'}</StyledSubmit>
+      <StyledSubmit onClick={handleSubmit}>{submitValue || 'Submit'}</StyledSubmit>
     </InputWrapper>
   );
 }
