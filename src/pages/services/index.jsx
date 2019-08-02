@@ -4,7 +4,7 @@ import Loader from "~/components/loader";
 import TitleBar from "~/components/title-bar";
 import api, { useAPI } from "~/core/api";
 import { formatService } from "~/core/utils";
-import ServiceCard from "./service-card";
+import ServiceCard from "~/pages/services/service-card";
 
 const ServicesList = styled.ul({
   listStyle: "none",
