@@ -7,7 +7,9 @@ import { B1, P2 } from "~/components/typography";
 import { getLightVariant } from "~/core/theme";
 
 const StyledLink = styled(Link)({
+  display: "block",
   textDecoration: "none",
+  marginBottom: "16px",
 });
 
 const Container = styled(Box)({
