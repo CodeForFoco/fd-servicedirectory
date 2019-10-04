@@ -95,10 +95,10 @@ Build and run the image using [Docker](https://www.docker.com/).
 Build the image,
 
 ```
-docker build -t fd-servicedirectory
+docker build -t fd-servicedirectory .
 ```
 
-Run container on port 1234 with `.env` containing `GOOGLE_API_KEY` as describe above,
+Run container on port 1234 with `.env` containing `GOOGLE_API_KEY` as described above,
 
 ```
 docker run -it --rm -p 1234:1234 --env-file=.env fd-servicedirectory:latest
