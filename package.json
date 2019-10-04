@@ -48,7 +48,7 @@
 	"dependencies": {
 		"axios": "0.18.1",
 		"husky": "^2.4.0",
-		"lodash": "^4.17.11",
+		"lodash": "^4.17.13",
 		"polished": "^3.3.0",
 		"qs": "^6.7.0",
 		"react": "^16.8.6",
