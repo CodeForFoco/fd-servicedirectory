@@ -35,8 +35,8 @@ const Help = () => {
               <b>Service or Organization Infomation was incorrect.</b>
             </p>
             <p>
-              Contact the Pourde Fire Authority to request adding a new service
-              or organization.
+              Contact the Poudre Fire Authority to request updating information
+              for a service or organization.
             </p>
           </Li>
           <Li>
@@ -44,7 +44,8 @@ const Help = () => {
               <b>I can&apos;t find a service or organization.</b>
             </p>
             <p>
-              Try looking for the service or organization on the Home or Search
+              Try looking for the service or organization on the{" "}
+              <a href="/categories">Home</a> or <a href="/search">Search</a>{" "}
               page. If you&apos;d like to add a service or organization, see the
               issue below.
             </p>
@@ -54,7 +55,7 @@ const Help = () => {
               <b>How do I add a new Service or Organization?</b>
             </p>
             <p>
-              Contact the Pourde Fire Authority to request adding a new service
+              Contact the Poudre Fire Authority to request adding a new service
               or organization.
             </p>
           </Li>
@@ -63,7 +64,7 @@ const Help = () => {
               <b>How do I report an issue?</b>
             </p>
             <p>
-              Contact the Pourde Fire Authority regarding any issues you find.
+              Contact the Poudre Fire Authority regarding any issues you find.
             </p>
           </Li>
           <Li>
@@ -71,7 +72,7 @@ const Help = () => {
               <b>How do I request a feature?</b>
             </p>
             <p>
-              Contact the Pourde Fire Authority regarding any feature requests.
+              Contact the Poudre Fire Authority regarding any feature requests.
             </p>
           </Li>
         </ul>
@@ -80,7 +81,10 @@ const Help = () => {
           To reach someone at PFA during business hours, 8 a.m. to 5 p.m. Monday
           through Friday, you may contact:
         </p>
-        <p>PFA&apos;s Administrative offices | 970-416-2892</p>
+        <p>
+          PFA&apos;s Administrative offices:
+          <a href="tel:970-416-2892">970-416-2892</a>
+        </p>
       </HelpContainer>
     </Fragment>
   );
