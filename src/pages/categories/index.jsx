@@ -40,7 +40,7 @@ const Categories = () => {
         title: d[0],
         slug: d[1],
       })),
-      "label"
+      "title"
     );
 
   return (
