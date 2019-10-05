@@ -88,6 +88,24 @@ Follow these instructions to get the app up and running locally.
 8. Submit a Pull Request to the CodeForFoco repository with a clear title and description of your changes.
 9. Wait for a maintainer to review your PR, make changes if necessary, and get it merged!
 
+## Docker
+
+Build and run the image using [Docker](https://www.docker.com/).
+
+Build the image,
+
+```
+docker build -t fd-servicedirectory .
+```
+
+Run container on port 1234 with `.env` containing `GOOGLE_API_KEY` as described below,
+
+```
+docker run -it --rm -p 1234:1234 --env-file=.env.local fd-servicedirectory:latest
+```
+
+In browser go to: http://localhost:1234
+
 ## Tech Stack
 
 The PFA Service Directory is a Javascript application built using [React](https://reactjs.org). Under the hood, it also uses the following technologies:
