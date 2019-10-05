@@ -1,5 +1,5 @@
 #Build: docker build -t fd-servicedirectory .
-#Run: docker run -it --rm --env-file=.env -p 1234:1234 fd-servicedirectory:latest
+#Run: docker run -it --rm --env-file=.env.local -p 1234:1234 fd-servicedirectory:latest
 
 #Use LTS slim node base image
 FROM node:lts-slim
