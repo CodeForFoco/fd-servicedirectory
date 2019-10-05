@@ -4,7 +4,10 @@ import { H1 } from "~/components/typography";
 import Logo from "~/components/logo";
 
 const HelpContainer = styled.div({
-  padding: "0px 16px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "0px 16px 96px 16px",
 });
 
 const StyledLogo = styled(Logo)({
