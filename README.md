@@ -74,6 +74,7 @@ Follow these instructions to get the app up and running locally.
 * [Yarn](https://yarnpkg.com/en/docs/install)
 
 ## Contributing
+* Important note: Any merges to master are automatically deployed. You've been warned!
 
 1. Find some issue you're interested in, or a feature that you'd like to tackle.
 2. Fork, then clone: `git@github.com:CodeForFoco/fd-servicedirectory.git`
