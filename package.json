@@ -7,11 +7,12 @@
 	"author": "Code for Fort Collins",
 	"license": "MIT",
 	"scripts": {
-		"develop": "parcel src/index.html",
-		"build": "parcel build src/index.html",
+		"develop": "yarn run copy-assets && parcel src/index.html",
+		"build": "yarn run copy-assets && parcel build src/index.html",
 		"lint": "eslint src/ --ext .jsx,.js",
 		"test": "jest src/ --verbose",
-		"heroku-postbuild": "yarn build"
+		"heroku-postbuild": "yarn build",
+		"copy-assets": "cp -a ./src/assets/. ./dist/assets"
 	},
 	"browserslist": [
 		"last 2 Chrome versions"
@@ -23,10 +24,10 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx}": [
-      "eslint --fix",
-      "git add",
-      "jest --bail --findRelatedTests --verbose"
-    ]
+			"eslint --fix",
+			"git add",
+			"jest --bail --findRelatedTests --verbose"
+		]
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
