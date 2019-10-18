@@ -23,10 +23,10 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx}": [
-			"eslint --fix",
-			"git add",
-			"jest --bail --findRelatedTests --verbose"
-		]
+      "eslint --fix",
+      "git add",
+      "jest --bail --findRelatedTests --verbose"
+    ]
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
