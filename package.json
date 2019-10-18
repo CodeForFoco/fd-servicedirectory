@@ -7,12 +7,11 @@
 	"author": "Code for Fort Collins",
 	"license": "MIT",
 	"scripts": {
-		"develop": "yarn run copy-assets && parcel src/index.html",
-		"build": "yarn run copy-assets && parcel build src/index.html",
+		"develop": "parcel src/index.html",
+		"build": "parcel build src/index.html",
 		"lint": "eslint src/ --ext .jsx,.js",
 		"test": "jest src/ --verbose",
-		"heroku-postbuild": "yarn build",
-		"copy-assets": "cp -a ./src/assets/. ./dist/assets"
+		"heroku-postbuild": "yarn build"
 	},
 	"browserslist": [
 		"last 2 Chrome versions"
