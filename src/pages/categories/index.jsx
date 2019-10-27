@@ -1,4 +1,3 @@
-import uniqBy from "lodash/uniqBy";
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
@@ -24,29 +23,40 @@ const IntroText = styled(H1)({
   textAlign: "center",
 });
 
+// Transforms the data into usable objects and filter out duplicates
+const getCategories = data => {
+  const categoriesBySlug = {};
+  data.forEach(([title, slug, description, icon, color]) => {
+    const existingCategory = categoriesBySlug[slug];
+    const category = {
+      color,
+      description,
+      icon,
+      slug,
+      title,
+    };
+    if (!existingCategory) {
+      categoriesBySlug[slug] = category;
+    } else {
+      // Check for duplicate values; warn if we see them
+      ["title", "description", "icon", "color"].forEach(fieldName => {
+        if (category[fieldName] !== existingCategory[fieldName]) {
+          console.warn(
+            `Mismatched ${fieldName} values for entries with category slug ${slug}: ${category[fieldName]} and ${existingCategory[fieldName]}`
+          );
+        }
+      });
+    }
+  });
+  return Object.values(categoriesBySlug);
+};
+
 const Categories = () => {
   const { loading, errorMessage, data } = useAPI(api.getIndex);
-
-  if (loading) {
-    return <Loader />;
-  }
 
   if (errorMessage) {
     return <Error {...{ errorMessage }} />;
   }
-
-  // Transforms the data into usable objects and filter out duplicates
-  const getCategories = data =>
-    uniqBy(
-      data.map(d => ({
-        color: d[4],
-        description: d[2],
-        icon: d[3],
-        title: d[0],
-        slug: d[1],
-      })),
-      "title"
-    );
 
   return (
     <Fragment>
@@ -57,14 +67,7 @@ const Categories = () => {
       ) : (
         <CategoryList>
           {getCategories(data).map(c => (
-            <CategoryCard
-              color={c.color}
-              description={c.description}
-              icon={c.icon}
-              key={c.slug}
-              link={c.slug}
-              title={c.title}
-            />
+            <CategoryCard key={c.slug} {...c} />
           ))}
         </CategoryList>
       )}
