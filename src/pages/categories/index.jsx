@@ -1,8 +1,9 @@
-import { uniqBy } from "lodash";
+import uniqBy from "lodash/uniqBy";
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
+import Error from "~/components/error";
 import { H1 } from "~/components/typography";
 import api, { useAPI } from "~/core/api";
 import CategoryCard from "./category-card";
@@ -24,10 +25,14 @@ const IntroText = styled(H1)({
 });
 
 const Categories = () => {
-  const { loading, error, data } = useAPI(api.getIndex);
+  const { loading, errorMessage, data } = useAPI(api.getIndex);
 
-  if (error) {
-    return <p>Something went wrong!</p>;
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (errorMessage) {
+    return <Error {...{ errorMessage }} />;
   }
 
   // Transforms the data into usable objects and filter out duplicates
