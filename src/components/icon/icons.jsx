@@ -58,6 +58,7 @@ const Icons = ({ icon }) => {
         />
       );
     default:
+      console.warn("Unknown icon type:", icon);
       return null;
   }
 };

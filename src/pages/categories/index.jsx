@@ -5,6 +5,7 @@ import Loader from "~/components/loader";
 import Error from "~/components/error";
 import { H1 } from "~/components/typography";
 import api, { useAPI } from "~/core/api";
+import theme from "~/core/theme";
 import CategoryCard from "./category-card";
 
 const StyledLogo = styled(Logo)({
@@ -35,14 +36,19 @@ const getCategories = data => {
       slug,
       title,
     };
+    if (theme.colors[color] === undefined) {
+      console.warn(`Unknown icon color: ${color}`);
+    }
     if (!existingCategory) {
       categoriesBySlug[slug] = category;
     } else {
       // Check for duplicate values; warn if we see them
       ["title", "description", "icon", "color"].forEach(fieldName => {
-        if (category[fieldName] !== existingCategory[fieldName]) {
+        const existingVal = existingCategory[fieldName];
+        const val = category[fieldName];
+        if (existingVal !== val) {
           console.warn(
-            `Mismatched ${fieldName} values for entries with category slug ${slug}: ${category[fieldName]} and ${existingCategory[fieldName]}`
+            `Entries with category slug ${slug} have different ${fieldName} values: ${existingVal} and ${val}`
           );
         }
       });
