@@ -77,13 +77,6 @@ export const useAPI = (fetcher, opts) => {
           dispatch({ type: "SUCCESS", payload: data });
         }
       } catch (e) {
-        console.error(
-          fetcher.name,
-          opts ? `with argument ${opts}` : "",
-          "failed with:",
-          e,
-          e.response && e.response.data
-        );
         if (!didCancel) {
           // Dispatch a 'failure' action if the request failed
           let errorMessage = DEFAULT_ERROR_MESSAGE;

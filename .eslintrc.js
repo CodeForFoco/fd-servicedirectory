@@ -14,7 +14,6 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['jsx-a11y', 'react', 'prettier', 'react-hooks'],
   rules: {
-    'no-console': 'off',
     'prettier/prettier': [2, { trailingComma: 'es5' }],
     'react/prop-types': 0,
     'react-hooks/rules-of-hooks': 2,
