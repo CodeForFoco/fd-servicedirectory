@@ -3,8 +3,11 @@ import { useEffect, useReducer } from "react";
 import { getSheetData } from "./utils";
 import { stringify } from "qs";
 
-const SHEET_ID = "1ZPRRR8T51Tk-Co8h_GBh3G_7P2F7ZrYxPQDSYycpCUg";
+const SHEET_ID =
+  process.env.SHEET_ID || "1ZPRRR8T51Tk-Co8h_GBh3G_7P2F7ZrYxPQDSYycpCUg";
 const API_KEY = process.env.GOOGLE_API_KEY;
+
+const DEFAULT_ERROR_MESSAGE = "Something went wrong!";
 
 // Create our API client and inject the API key into every request
 const client = axios.create({
@@ -12,7 +15,20 @@ const client = axios.create({
   params: { key: API_KEY },
 });
 
-// Utility for fetching a single sheet from a spreadsheet by its' title
+// Utility for fetching metadata about the sheets in the spreadsheet
+const getSheetTitles = async () => {
+  // sheetMetadata will be a list of sheets: { "sheets": [ { "properties": { "title": "Index" } }, ... ] }
+  const sheetMetadata = await client.get("", {
+    params: {
+      fields: "sheets.properties.title",
+    },
+  });
+  return sheetMetadata.data.sheets
+    .map(sheet => sheet.properties.title)
+    .filter(title => title !== "Index");
+};
+
+// Utility for fetching a single sheet from a spreadsheet by its title
 const getSheetByTitle = async title =>
   await client.get("values:batchGet", {
     params: {
@@ -25,9 +41,9 @@ const getSheetByTitle = async title =>
 const APIFetchReducer = (state, action) => {
   switch (action.type) {
     case "SUCCESS":
-      return { ...state, loading: false, error: false, data: action.payload };
+      return { ...state, loading: false, data: action.payload };
     case "FAILURE":
-      return { ...state, loading: false, error: true };
+      return { ...state, loading: false, errorMessage: action.errorMessage };
     default:
       throw new Error();
   }
@@ -42,7 +58,7 @@ export const useAPI = (fetcher, opts) => {
   // Create a reducer to store the status of the request
   const [state, dispatch] = useReducer(APIFetchReducer, {
     loading: true,
-    error: false,
+    errorMessage: null,
     data: {},
   });
 
@@ -63,7 +79,19 @@ export const useAPI = (fetcher, opts) => {
       } catch (e) {
         if (!didCancel) {
           // Dispatch a 'failure' action if the request failed
-          dispatch({ type: "FAILURE" });
+          let errorMessage = DEFAULT_ERROR_MESSAGE;
+          if (e.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx (https://github.com/axios/axios#handling-errors)
+            const { error: { message, status } = {} } = e.response.data;
+            if (
+              status === "INVALID_ARGUMENT" &&
+              message.startsWith("Unable to parse range:")
+            ) {
+              errorMessage = `Failed to get services for type ${opts}`;
+            }
+          }
+          dispatch({ type: "FAILURE", errorMessage });
         }
       }
     };
@@ -86,24 +114,16 @@ export const useAPI = (fetcher, opts) => {
 export default {
   // Returns *all* services as a single array—for use in search
   getAllServices: async () => {
-    const index = await getSheetByTitle("Index");
-    // IMPORTANT: If a sheet name does not match the index, this throws an error.
-    // We need to check if a sheet exists before requesting it.
-    // The error I encounted as of writing this comment was pet-health did not match pet-animal-health
-    // so, I hacked it by replacing pet-health with pet-animal-health for now.
-    // THIS COULD CAUSE A BREAKING ERROR IN THE FUTURE, SO WE NEED TO ACCOUNT FOR THIS. 
-    let types = getSheetData(index.data).map(row => row[6]);
-    // Temporary hack
-    types[types.indexOf('pet-health')] = 'pet-animal-health';
+    const types = await getSheetTitles();
     const allServicesRes = await client.get("values:batchGet", {
       params: {
         majorDimension: "ROWS",
-        ranges: types
+        ranges: types,
       },
       paramsSerializer: params => {
         return stringify(params, { indices: false });
       },
-  });
+    });
     const allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
       return [...list, ...type.values];
     }, []);
@@ -119,4 +139,5 @@ export default {
     const res = await getSheetByTitle(type);
     return getSheetData(res.data);
   },
+  DEFAULT_ERROR_MESSAGE,
 };

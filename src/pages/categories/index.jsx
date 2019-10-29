@@ -1,8 +1,8 @@
-import { uniqBy } from "lodash";
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
+import Error from "~/components/error";
 import { H1 } from "~/components/typography";
 import api, { useAPI } from "~/core/api";
 import CategoryCard from "./category-card";
@@ -23,25 +23,27 @@ const IntroText = styled(H1)({
   textAlign: "center",
 });
 
+// Transforms the data into usable objects and filter out duplicates
+const getCategories = data =>
+  Object.values(
+    data.reduce((categories, [title, slug, description, icon, color]) => {
+      categories[slug] = categories[slug] || {
+        color,
+        description,
+        icon,
+        slug,
+        title,
+      };
+      return categories;
+    }, {})
+  );
+
 const Categories = () => {
-  const { loading, error, data } = useAPI(api.getIndex);
+  const { loading, errorMessage, data } = useAPI(api.getIndex);
 
-  if (error) {
-    return <p>Something went wrong!</p>;
+  if (errorMessage) {
+    return <Error {...{ errorMessage }} />;
   }
-
-  // Transforms the data into usable objects and filter out duplicates
-  const getCategories = data =>
-    uniqBy(
-      data.map(d => ({
-        color: d[4],
-        description: d[2],
-        icon: d[3],
-        title: d[0],
-        slug: d[1],
-      })),
-      "title"
-    );
 
   return (
     <Fragment>
@@ -52,14 +54,7 @@ const Categories = () => {
       ) : (
         <CategoryList>
           {getCategories(data).map(c => (
-            <CategoryCard
-              color={c.color}
-              description={c.description}
-              icon={c.icon}
-              key={c.slug}
-              link={c.slug}
-              title={c.title}
-            />
+            <CategoryCard key={c.slug} {...c} />
           ))}
         </CategoryList>
       )}
