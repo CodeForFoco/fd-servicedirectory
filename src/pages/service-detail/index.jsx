@@ -12,7 +12,7 @@ import api, { useAPI } from "~/core/api";
 import { formatPhoneNumber, formatService } from "~/core/utils";
 
 const ServiceCard = styled(Box)({
-  margin: "72px 16px 104px 16px",
+  margin: "72px 16px 0 16px",
 });
 
 const Description = styled(P1)({
@@ -28,8 +28,6 @@ const PhoneLink = styled.a({
   margin: "8px 0 16px 0",
   textDecoration: "none",
 });
-
-const urlQuery = new URLSearchParams(location.search);
 
 const ServiceDetail = ({ match }) => {
   const { categoryId, serviceId, typeId } = match.params;
@@ -57,7 +55,10 @@ const ServiceDetail = ({ match }) => {
   return (
     <Fragment>
       <TitleBar
-        backLink={new URLSearchParams(location.search).get("backLink") || `/categories/${categoryId}/${typeId}`}
+        backLink={
+          new URLSearchParams(location.search).get("backLink") ||
+          `/categories/${categoryId}/${typeId}`
+        }
         title={service.title}
       />
       <ServiceCard>

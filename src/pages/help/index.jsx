@@ -7,7 +7,7 @@ const HelpContainer = styled.div({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "0px 16px 96px 16px",
+  padding: "0 16px",
 });
 
 const StyledLogo = styled(Logo)({
@@ -85,7 +85,7 @@ const Help = () => {
           through Friday, you may contact:
         </p>
         <p>
-          PFA&apos;s Administrative offices:
+          PFA&apos;s Administrative offices:&nbsp;
           <a href="tel:970-416-2892">970-416-2892</a>
         </p>
       </HelpContainer>

@@ -13,8 +13,8 @@ const StyledLogo = styled(Logo)({
 
 const CategoryList = styled.ul({
   listStyle: "none",
-  margin: "40px 0 0 0",
-  padding: "16px",
+  marginTop: "40px",
+  padding: "0 16px",
 });
 
 const IntroText = styled(H1)({
