@@ -13,7 +13,7 @@ import api, { useAPI } from "~/core/api";
 import { formatPhoneNumber, formatService } from "~/core/utils";
 
 const ServiceCard = styled(Box)({
-  margin: "72px 16px 104px 16px",
+  margin: "72px 16px 0 16px",
 });
 
 const Description = styled(P1)({

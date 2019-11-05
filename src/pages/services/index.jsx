@@ -9,7 +9,7 @@ import ServiceCard from "~/pages/services/service-card";
 
 const ServicesList = styled.ul({
   listStyle: "none",
-  margin: "72px 0 104px 0",
+  marginTop: "72px",
   padding: "0 16px",
 });
 

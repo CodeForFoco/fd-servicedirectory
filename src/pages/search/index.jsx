@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
@@ -21,14 +21,14 @@ const IntroText = styled(H1)({
 const AlignInput = styled.div({
   display: "flex",
   justifyContent: "center",
-  padding: "8px 16px"
+  padding: "8px 16px",
 });
 
 const SearchResultsWrapper = styled.div({
-  padding: "0px 16px 88px 16px"
+  padding: "0 16px",
 });
 
-const dataToIdIndexPairs = (data) => {
+const dataToIdIndexPairs = data => {
   let myData = data.concat();
   myData.shift();
   return myData.map(service => {
@@ -37,7 +37,7 @@ const dataToIdIndexPairs = (data) => {
     let id = service[1];
     return { id, index };
   });
-}
+};
 
 const queryServices = (data, query) => {
   let idIndexPairs = dataToIdIndexPairs(data);
@@ -55,9 +55,9 @@ const queryServices = (data, query) => {
     matches.push(data[rowIndex]);
   });
   return matches;
-}
+};
 
-const Search = ({ match }) => {
+const Search = () => {
   const { loading, error, data } = useAPI(api.getAllServices);
   const index = useAPI(api.getIndex);
   const urlQuery = new URLSearchParams(location.search);
@@ -69,7 +69,13 @@ const Search = ({ match }) => {
     return <p>Something went wrong!</p>;
   }
 
-  if (!loading && !index.loading && !searchResults && urlQuery.get("s") && urlQuery.get("s") !== '') {
+  if (
+    !loading &&
+    !index.loading &&
+    !searchResults &&
+    urlQuery.get("s") &&
+    urlQuery.get("s") !== ""
+  ) {
     setSearchResults(queryServices(data, searchValue));
   }
 
@@ -82,11 +88,13 @@ const Search = ({ match }) => {
           value={searchValue}
           inputPlaceholder="Search for a service"
           submitValue="Search"
-          setValue={(e) => {
+          setValue={e => {
             setSearchValue(e.target.value);
           }}
           handleSubmit={() => {
-            if (loading || index.loading) { return; }
+            if (loading || index.loading) {
+              return;
+            }
             setSearchResults(queryServices(data, searchValue));
           }}
         />
@@ -95,18 +103,26 @@ const Search = ({ match }) => {
         <Loader />
       ) : (
         <SearchResultsWrapper>
-          {searchResults && searchResults.length > 0 ? searchResults.map((service, i) => {
-            let myService = formatService(service);
-            let link = "/categories/";
-            index.data.forEach(category => {
-              if (myService.type === category[6]) {
-                link += category[1];
-                return;
-              }
-            });
-            link += `/${myService.type}/${myService.id}?backLink=/search?s=${searchValue}`;
-            return <ServiceCard link={link} service={myService} key={'search-' + i + service[1]}/>
-          }): ''}
+          {searchResults && searchResults.length > 0
+            ? searchResults.map((service, i) => {
+                let myService = formatService(service);
+                let link = "/categories/";
+                index.data.forEach(category => {
+                  if (myService.type === category[6]) {
+                    link += category[1];
+                    return;
+                  }
+                });
+                link += `/${myService.type}/${myService.id}?backLink=/search?s=${searchValue}`;
+                return (
+                  <ServiceCard
+                    link={link}
+                    service={myService}
+                    key={"search-" + i + service[1]}
+                  />
+                );
+              })
+            : ""}
         </SearchResultsWrapper>
       )}
     </Fragment>

@@ -8,7 +8,7 @@ import TypeCard from "./type-card";
 
 const TypesList = styled.ul({
   listStyle: "none",
-  margin: "72px 0 104px 0",
+  marginTop: "72px",
   padding: "0 16px",
 });
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
 import Nav from "~/components/nav";
 import theme from "~/core/theme";
@@ -19,28 +19,34 @@ const GlobalStyles = createGlobalStyle`
 	}
 `;
 
+const PageContainer = styled.div({
+  marginBottom: "96px",
+});
+
 const App = () => (
   <ThemeProvider theme={theme}>
     <BrowserRouter>
       <Normalize />
       <GlobalStyles />
-      <Switch>
-        <Route exact path="/" render={() => <Redirect to="/categories" />} />
-        <Route exact path="/search" component={Search} />
-        <Route exact path="/categories" component={Categories} />
-        <Route exact path="/categories/:categoryId" component={Types} />
-        <Route
-          exact
-          path="/categories/:categoryId/:typeId"
-          component={Services}
-        />
-        <Route
-          exact
-          path="/categories/:categoryId/:typeId/:serviceId"
-          component={ServiceDetail}
-        />
-        <Route exact path="/help" component={Help} />
-      </Switch>
+      <PageContainer>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/categories" />} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/categories" component={Categories} />
+          <Route exact path="/categories/:categoryId" component={Types} />
+          <Route
+            exact
+            path="/categories/:categoryId/:typeId"
+            component={Services}
+          />
+          <Route
+            exact
+            path="/categories/:categoryId/:typeId/:serviceId"
+            component={ServiceDetail}
+          />
+          <Route exact path="/help" component={Help} />
+        </Switch>
+      </PageContainer>
       <Nav />
     </BrowserRouter>
   </ThemeProvider>
