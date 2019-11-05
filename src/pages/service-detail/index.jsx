@@ -4,6 +4,7 @@ import Box from "~/components/box";
 import Button from "~/components/button";
 import Divider from "~/components/divider";
 import Loader from "~/components/loader";
+import Error from "~/components/error";
 import PhysicalInfo from "~/components/physical-info";
 import Requirements from "~/components/requirements";
 import TitleBar from "~/components/title-bar";
@@ -32,14 +33,14 @@ const PhoneLink = styled.a({
 const ServiceDetail = ({ match }) => {
   const { categoryId, serviceId, typeId } = match.params;
 
-  const { loading, error, data } = useAPI(api.getServicesByType, typeId);
+  const { loading, errorMessage, data } = useAPI(api.getServicesByType, typeId);
 
   if (loading) {
     return <Loader />;
   }
 
-  if (error) {
-    return <p>Something went wrong!</p>;
+  if (errorMessage) {
+    return <Error {...{ errorMessage }} />;
   }
 
   const serviceRow = data.find(d => d[1] === serviceId);

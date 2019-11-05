@@ -43,8 +43,8 @@ const Description = styled(P2)({
   color: "#696C72",
 });
 
-const CategoryCard = ({ color, description, icon, link, title }) => (
-  <StyledLink to={`/categories/${link}`}>
+const CategoryCard = ({ color, description, icon, slug, title }) => (
+  <StyledLink to={`/categories/${slug}`}>
     <Container as="li">
       <IconBackground color={color}>
         <StyledIcon color={color} icon={icon} />
