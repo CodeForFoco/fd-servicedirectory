@@ -12,8 +12,6 @@ import Services from "~/pages/services";
 import ServiceDetail from "~/pages/service-detail";
 import Types from "~/pages/types";
 
-import test from "~/core/happy.ts";
-
 const GlobalStyles = createGlobalStyle`
 	body {
 		background: #F8F9FB;
@@ -30,7 +28,6 @@ const App = () => (
     <BrowserRouter>
       <Normalize />
       <GlobalStyles />
-      {test(5)}
       <PageContainer>
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/categories" />} />
