@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import Loader from "~/components/loader";
+import Error from "~/components/error";
 import TitleBar from "~/components/title-bar";
 import api, { useAPI } from "~/core/api";
 import { formatService } from "~/core/utils";
@@ -8,21 +9,21 @@ import ServiceCard from "~/pages/services/service-card";
 
 const ServicesList = styled.ul({
   listStyle: "none",
-  margin: "72px 0 104px 0",
+  marginTop: "72px",
   padding: "0 16px",
 });
 
 const Services = ({ match }) => {
   const { categoryId, typeId } = match.params;
 
-  const { loading, error, data } = useAPI(api.getServicesByType, typeId);
+  const { loading, errorMessage, data } = useAPI(api.getServicesByType, typeId);
 
   if (loading) {
     return <Loader />;
   }
 
-  if (error) {
-    return <p>Something went wrong!</p>;
+  if (errorMessage) {
+    return <Error {...{ errorMessage }} />;
   }
 
   // Format services into useful objects
