@@ -1,8 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
+import { configureStore } from "~/core/store";
 import Nav from "~/components/nav";
 import theme from "~/core/theme";
 import Categories from "~/pages/categories";
@@ -22,6 +24,9 @@ const GlobalStyles = createGlobalStyle`
 const PageContainer = styled.div({
   marginBottom: "96px",
 });
+
+// Initialize Redux store
+const store = configureStore({});
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -52,4 +57,9 @@ const App = () => (
   </ThemeProvider>
 );
 
-render(<App />, document.getElementById("app"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("app")
+);
