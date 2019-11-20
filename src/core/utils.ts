@@ -1,5 +1,11 @@
+import formattedService from "./interfaces/formattedService";
+
+interface iSheet {
+  valueRanges: Array<any>;
+}
+
 // Returns the rows of data from a sheet (excluding the header row)
-export const getSheetData = sheet => {
+export const getSheetData = (sheet: iSheet): Array<any> => {
   const items = sheet.valueRanges[0].values;
   // Remove the header row
   items.shift();
@@ -12,7 +18,7 @@ export const getSheetData = sheet => {
  * Note: A fallback is required for the Phone # field because
  * the Sheets API omits the last column if there's no value.
  */
-export const formatService = service => {
+export const formatService = (service: any): formattedService => {
   // Split the comma separated populations into an array
   const populations = service[3] === "" ? [] : service[3].split(", ");
   return {
@@ -36,8 +42,21 @@ export const formatService = service => {
   };
 };
 
+interface requirement {
+  name: string;
+  format: string;
+}
+
+interface requirementFormat {
+  expanded: string;
+  compact: string;
+}
+
 // Returns the name for a requirement based on the requirement name and format
-export const getRequirementName = ({ name, format = "expanded" }) =>
+export const getRequirementName = ({
+  name,
+  format = "expanded",
+}: requirement): requirementFormat =>
   ({
     id: { expanded: "Valid ID", compact: "ID" },
     residency: { expanded: "Proof of Residency", compact: "Residency" },
@@ -46,7 +65,7 @@ export const getRequirementName = ({ name, format = "expanded" }) =>
     appointment: { expanded: "Appointment Required", compact: "Appointment" },
   }[name][format]);
 
-export const formatListAsSentence = items => {
+export const formatListAsSentence = (items: Array<any>): string => {
   if (items.length === 1) {
     return items[0];
   }
@@ -57,7 +76,7 @@ export const formatListAsSentence = items => {
 };
 
 // Formats a phone number. `970-555-1234` -> `(970) 555-1234`
-export const formatPhoneNumber = phone => {
+export const formatPhoneNumber = (phone: string): string => {
   const [areaCode, prefix, suffix] = phone.split("-");
   return `(${areaCode}) ${prefix}-${suffix}`;
 };

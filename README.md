@@ -74,7 +74,8 @@ Follow these instructions to get the app up and running locally.
 * [Yarn](https://yarnpkg.com/en/docs/install)
 
 ## Contributing
-* Important note: Any merges to master are automatically deployed. You've been warned!
+* Important note: **Any merges to master are automatically deployed.** You've been warned!
+* We are migrating to TypeScript. All future .js and .jsx files should be .ts and .tsx before being merged.
 
 1. Find some issue you're interested in, or a feature that you'd like to tackle.
 2. Fork, then clone: `git@github.com:CodeForFoco/fd-servicedirectory.git`
