@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
+import useServices from "~/core/store/services/useServices";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
 import Error from "~/components/error";
 import { H1 } from "~/components/typography";
-import api, { useAPI } from "~/core/api";
 import CategoryCard from "./category-card";
 
 const StyledLogo = styled(Logo)({
@@ -39,7 +39,7 @@ const getCategories = data =>
   );
 
 const Categories = () => {
-  const { loading, errorMessage, data } = useAPI(api.getIndex);
+  const { loading, errorMessage, data } = useServices();
 
   if (errorMessage) {
     return <Error {...{ errorMessage }} />;
@@ -51,12 +51,14 @@ const Categories = () => {
       <IntroText>Pick a category to see services in your area.</IntroText>
       {loading ? (
         <Loader />
-      ) : (
+      ) : data ? (
         <CategoryList>
           {getCategories(data).map(c => (
             <CategoryCard key={c.slug} {...c} />
           ))}
         </CategoryList>
+      ) : (
+        "Oops, something went wrong!"
       )}
     </Fragment>
   );

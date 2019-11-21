@@ -11,11 +11,6 @@ export const configureStore = initialState => {
 };
 
 export const initializeStore = () => {
-  return configureStore({
-    services: {
-      loading: false,
-      errorMessage: null,
-      data: null,
-    },
-  });
+  // State is intialized per reducer
+  return configureStore({});
 };

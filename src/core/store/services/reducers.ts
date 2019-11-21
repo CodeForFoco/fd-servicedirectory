@@ -1,17 +1,10 @@
+import { asyncState, asyncAction } from "~/core/interfaces/asyncAction";
+
 // Reducer that handles state for the useAPI hook
-interface iAction {
-  type: string;
-  payload: any;
-  errorMessage: string;
-}
-
-interface iState {
-  loading: boolean;
-  errorMessage: string;
-  data: any;
-}
-
-const getServicesReducer = (state: iState, action: iAction) => {
+const getServicesReducer = (
+  state: asyncState = { loading: false, errorMessage: null, data: null },
+  action: asyncAction
+) => {
   switch (action.type) {
     case "GET_SERVICES_LOADING":
       return { ...state, loading: false, data: null, errorMessage: null };
@@ -30,7 +23,7 @@ const getServicesReducer = (state: iState, action: iAction) => {
         errorMessage: null,
       };
     default:
-      throw new Error();
+      return state;
   }
 };
 

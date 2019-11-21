@@ -57,17 +57,22 @@ export const getServicesLoading = () => ({
   errorMessage: null,
 });
 
-export default {
-  /**
-   * Handlers for the various types of data we want from the Sheets API
-   * They should return parsed sheet data, rather than the raw response
-   * from the API.
-   */
-  // Returns *all* services as a single array—for use in search
-  getAllServices: () => async ({ services }, dispatch) => {
-    // Check if we have the google sheet
-    if (services) return;
+/**
+ * Handlers for the various types of data we want from the Sheets API
+ * They should return parsed sheet data, rather than the raw response
+ * from the API.
+ */
+// Fetches all services and updates global state. "redux-thunk" action.
+export const getAllServices = () => async (dispatch, getState) => {
+  // Check if we have the google sheet
+  const services = getState().services;
+  if (services.data)
+    return dispatch(getServicesError("Error: all services already loaded."));
 
+  let allServices = [];
+
+  try {
+    dispatch(getServicesLoading());
     const types = await getSheetTitles();
     const allServicesRes = await client.get("values:batchGet", {
       params: {
@@ -78,11 +83,18 @@ export default {
         return stringify(params, { indices: false });
       },
     });
-    const allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
+    allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
       return [...list, ...type.values];
     }, []);
-    dispatch(getServicesSuccess(allServices));
-  },
+  } catch (e) {
+    // Dispatch a 'failure' action if the request failed
+    return dispatch(getServicesError(DEFAULT_ERROR_MESSAGE));
+  }
+
+  dispatch(getServicesSuccess(allServices));
+};
+
+export default {
   // Returns the spreadsheet's index sheet
   getIndex: async () => {
     const res = await getSheetByTitle("Index");
