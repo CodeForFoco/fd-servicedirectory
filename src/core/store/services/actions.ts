@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getSheetData } from "./utils";
+import { getSheetData } from "~/core/utils";
 import { stringify } from "qs";
 
 const SHEET_ID =
@@ -35,14 +35,39 @@ const getSheetByTitle = async title =>
       ranges: title,
     },
   });
+
 /**
- * Handlers for the various types of data we want from the Sheets API
- * They should return parsed sheet data, rather than the raw response
- * from the API.
+ * Actions relating to fetching the google spreadsheet.
  */
+export const getServicesSuccess = (payload: any) => ({
+  type: "GET_SERVICES_SUCCESS",
+  payload,
+  errorMessage: null,
+});
+
+export const getServicesError = (errorMessage: string) => ({
+  type: "GET_SERVICES_ERROR",
+  payload: null,
+  errorMessage,
+});
+
+export const getServicesLoading = () => ({
+  type: "GET_SERVICES_LOADING",
+  payload: null,
+  errorMessage: null,
+});
+
 export default {
+  /**
+   * Handlers for the various types of data we want from the Sheets API
+   * They should return parsed sheet data, rather than the raw response
+   * from the API.
+   */
   // Returns *all* services as a single array—for use in search
-  getAllServices: async () => {
+  getAllServices: () => async ({ services }, dispatch) => {
+    // Check if we have the google sheet
+    if (services) return;
+
     const types = await getSheetTitles();
     const allServicesRes = await client.get("values:batchGet", {
       params: {
@@ -56,7 +81,7 @@ export default {
     const allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
       return [...list, ...type.values];
     }, []);
-    return allServices;
+    dispatch(getServicesSuccess(allServices));
   },
   // Returns the spreadsheet's index sheet
   getIndex: async () => {

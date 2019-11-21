@@ -1,15 +1,13 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
+import services from "~/core/store/services/reducers";
 
-// Temporary Reducer. Remove this.
-const defaultReducer = (state, action) => {
-  let newAction = action;
-  Object.keys(newAction);
-  return state;
-};
+const reducers = combineReducers({
+  services,
+});
 
 export const configureStore = initialState => {
-  return createStore(defaultReducer, initialState, applyMiddleware(thunk));
+  return createStore(reducers, initialState, applyMiddleware(thunk));
 };
 
 export const initializeStore = () => {
