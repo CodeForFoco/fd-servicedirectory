@@ -11,3 +11,13 @@ const defaultReducer = (state, action) => {
 export const configureStore = initialState => {
   return createStore(defaultReducer, initialState, applyMiddleware(thunk));
 };
+
+export const initializeStore = () => {
+  return configureStore({
+    services: {
+      loading: false,
+      errorMessage: null,
+      data: null,
+    },
+  });
+};
