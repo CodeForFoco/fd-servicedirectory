@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import useServices from "~/core/store/services/useServices";
+import { useServicesIndex } from "~/core/store/services/useServices";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
@@ -39,7 +39,7 @@ const getCategories = data =>
   );
 
 const Categories = () => {
-  const { loading, errorMessage, data } = useServices();
+  const { loading, errorMessage, data } = useServicesIndex();
 
   if (errorMessage) {
     return <Error {...{ errorMessage }} />;
@@ -49,16 +49,14 @@ const Categories = () => {
     <Fragment>
       <StyledLogo />
       <IntroText>Pick a category to see services in your area.</IntroText>
-      {loading ? (
+      {loading || !data ? (
         <Loader />
-      ) : data ? (
+      ) : (
         <CategoryList>
           {getCategories(data).map(c => (
             <CategoryCard key={c.slug} {...c} />
           ))}
         </CategoryList>
-      ) : (
-        "Oops, something went wrong!"
       )}
     </Fragment>
   );

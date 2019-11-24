@@ -1,9 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import services from "~/core/store/services/reducers";
+import {
+  getServicesReducer as services,
+  getServicesIndex as servicesIndex,
+} from "~/core/store/services/reducers";
 
 const reducers = combineReducers({
   services,
+  servicesIndex,
 });
 
 export const configureStore = initialState => {

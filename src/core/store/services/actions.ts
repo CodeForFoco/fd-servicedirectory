@@ -37,8 +37,62 @@ const getSheetByTitle = async title =>
   });
 
 /**
- * Actions relating to fetching the google spreadsheet.
+ * Handlers for the various types of data we want from the Sheets API
+ * They should return parsed sheet data, rather than the raw response
+ * from the API.
  */
+// Fetches all services and updates global state. "redux-thunk" action.
+export const getAllServices = () => async (dispatch: Function) => {
+  let allServices = [];
+
+  // Dispatch Loading action
+  dispatch(getServicesLoading());
+
+  try {
+    const types = await getSheetTitles();
+    const allServicesRes = await client.get("values:batchGet", {
+      params: {
+        majorDimension: "ROWS",
+        ranges: types,
+      },
+      paramsSerializer: params => {
+        return stringify(params, { indices: false });
+      },
+    });
+    /*allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
+      return [...list, ...type.values];
+    }, []);*/
+    allServices = getSheetData(allServicesRes.data);
+  } catch (e) {
+    // Dispatch a 'failure' action if the request failed
+    return dispatch(getServicesError(DEFAULT_ERROR_MESSAGE));
+  }
+
+  // Dispatch services data
+  dispatch(getServicesSuccess(allServices));
+};
+
+// Returns the spreadsheet's index sheet
+export const getServicesIndex = () => async (dispatch: Function) => {
+  dispatch(getServicesIndexLoading());
+  try {
+    const res = await getSheetByTitle("Index");
+    return dispatch(getServicesIndexSuccess(getSheetData(res.data)));
+  } catch (e) {
+    return dispatch(getServicesIndexError(e));
+  }
+};
+
+// Returns the spreadsheet's services by type
+export const getServicesByType = () => async type => {
+  const res = await getSheetByTitle(type);
+  return getSheetData(res.data);
+};
+
+// Default error message
+export { DEFAULT_ERROR_MESSAGE };
+
+// getAllServices actions
 export const getServicesSuccess = (payload: any) => ({
   type: "GET_SERVICES_SUCCESS",
   payload,
@@ -57,53 +111,21 @@ export const getServicesLoading = () => ({
   errorMessage: null,
 });
 
-/**
- * Handlers for the various types of data we want from the Sheets API
- * They should return parsed sheet data, rather than the raw response
- * from the API.
- */
-// Fetches all services and updates global state. "redux-thunk" action.
-export const getAllServices = () => async (dispatch, getState) => {
-  // Check if we have the google sheet
-  const services = getState().services;
-  if (services.data)
-    return dispatch(getServicesError("Error: all services already loaded."));
+// getServicesIndex actions
+export const getServicesIndexSuccess = (payload: any) => ({
+  type: "GET_SERVICES_INDEX_SUCCESS",
+  payload,
+  errorMessage: null,
+});
 
-  let allServices = [];
+export const getServicesIndexError = (errorMessage: string) => ({
+  type: "GET_SERVICES_INDEX_ERROR",
+  payload: null,
+  errorMessage,
+});
 
-  try {
-    dispatch(getServicesLoading());
-    const types = await getSheetTitles();
-    const allServicesRes = await client.get("values:batchGet", {
-      params: {
-        majorDimension: "ROWS",
-        ranges: types,
-      },
-      paramsSerializer: params => {
-        return stringify(params, { indices: false });
-      },
-    });
-    allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
-      return [...list, ...type.values];
-    }, []);
-  } catch (e) {
-    // Dispatch a 'failure' action if the request failed
-    return dispatch(getServicesError(DEFAULT_ERROR_MESSAGE));
-  }
-
-  dispatch(getServicesSuccess(allServices));
-};
-
-export default {
-  // Returns the spreadsheet's index sheet
-  getIndex: async () => {
-    const res = await getSheetByTitle("Index");
-    return getSheetData(res.data);
-  },
-  // Returns a list of services for a given type
-  getServicesByType: async type => {
-    const res = await getSheetByTitle(type);
-    return getSheetData(res.data);
-  },
-  DEFAULT_ERROR_MESSAGE,
-};
+export const getServicesIndexLoading = () => ({
+  type: "GET_SERVICES_INDEX_LOADING",
+  payload: null,
+  errorMessage: null,
+});
