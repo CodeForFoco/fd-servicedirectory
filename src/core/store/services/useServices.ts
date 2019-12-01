@@ -11,10 +11,10 @@ export const useServices = () => {
   const services = useSelector(state => state.services);
   const dispatch = useDispatch();
 
-  // Equivilent to componentDidMount
+  // FETCH DATA 3 ATTEMPTS WHENEVER data = null && loading = false
   useEffect(() => {
     // Do not make additional requests for services.
-    if (services.data) return;
+    if (services && services.data) return;
     dispatch(getAllServices());
   }, []);
 
@@ -38,5 +38,22 @@ export const useServicesIndex = () => {
 
   return { loading, errorMessage, data };
 };
+
+/**
+ * Hooks for Categories, Types, and Services pages.
+ * Lifecycle:
+ * 1. GET all google sheets
+ * 2. Store globally in array
+ * 3. Hooks pull their data from the array
+ */
+
+// Returns a list of categories
+export const useCategories = () => {};
+
+// Returns a list of subtypes for a category
+//export const useSubTypes = category => {};
+
+// Returns a list of services for a subtype
+//export const useSubTypeServices = subtype => {};
 
 export default useServices;
