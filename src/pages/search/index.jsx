@@ -122,7 +122,7 @@ const Search = () => {
                   />
                 );
               })
-            : ""}
+            : "Oops! No results found."}
         </SearchResultsWrapper>
       )}
     </Fragment>
