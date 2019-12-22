@@ -1,4 +1,4 @@
-import { asyncState, asyncAction } from "~/core/interfaces/asyncAction";
+import { asyncState, asyncAction } from "~types/asyncAction";
 
 // Reducer that handles state for the useAPI hook
 export const getServicesReducer = (
@@ -28,12 +28,12 @@ export const getServicesReducer = (
 };
 
 export const getServicesIndex = (
-  state: asyncState = { loading: false, errorMessage: null, data: null },
+  state: asyncState = { loading: true, errorMessage: null, data: null },
   action: asyncAction
 ) => {
   switch (action.type) {
     case "GET_SERVICES_INDEX_LOADING":
-      return { ...state, loading: false, data: null, errorMessage: null };
+      return { ...state, loading: true, data: null, errorMessage: null };
     case "GET_SERVICES_INDEX_ERROR":
       return {
         ...state,

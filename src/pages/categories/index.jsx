@@ -53,8 +53,8 @@ const Categories = () => {
         <Loader />
       ) : (
         <CategoryList>
-          {getCategories(data).map(c => (
-            <CategoryCard key={c.slug} {...c} />
+          {getCategories(data).map(category => (
+            <CategoryCard key={category.slug} {...category} />
           ))}
         </CategoryList>
       )}

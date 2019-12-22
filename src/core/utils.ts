@@ -1,11 +1,11 @@
-import formattedService from "./interfaces/formattedService";
+import formattedService from "../types/formattedService";
 
 interface iSheet {
-  valueRanges: Array<any>;
+  valueRanges: any[];
 }
 
 // Returns the rows of data from a sheet (excluding the header row)
-export const getSheetData = (sheet: iSheet): Array<any> => {
+export const getSheetData = (sheet: iSheet): formattedService[] => {
   const items = sheet.valueRanges[0].values;
   // Remove the header row
   items.shift();

@@ -59,9 +59,6 @@ export const getAllServices = () => async (dispatch: Function) => {
         return stringify(params, { indices: false });
       },
     });
-    /*allServices = allServicesRes.data.valueRanges.reduce((list, type) => {
-      return [...list, ...type.values];
-    }, []);*/
     allServices = getSheetData(allServicesRes.data);
   } catch (e) {
     // Dispatch a 'failure' action if the request failed
