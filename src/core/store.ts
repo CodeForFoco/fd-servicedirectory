@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import {
   getServicesReducer as services,
   getServicesIndex as servicesIndex,
-} from "~/core/store/services/reducers";
+} from "~core/api/services/reducers";
 
 const reducers = combineReducers({
   services,

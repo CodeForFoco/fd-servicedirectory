@@ -17,6 +17,7 @@ export const useServices = (): formattedService[] => {
   return services;
 };
 
+// This should pull the global google sheet and use that data
 export const useServicesIndex = (): asyncState => {
   const dispatch = useDispatch();
   const { loading, errorMessage, data } = useSelector(

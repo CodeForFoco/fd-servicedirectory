@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useServicesIndex } from "~/core/store/services/useServices";
+import { useServicesIndex } from "~/core/api/services/useServices";
 import styled from "styled-components";
 import Logo from "~/components/logo";
 import Loader from "~/components/loader";
