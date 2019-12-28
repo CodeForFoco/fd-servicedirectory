@@ -1,9 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import {
-  getServicesReducer as services,
-  getServicesIndex as servicesIndex,
-} from "~core/api/services/reducers";
+import { getServicesReducer as services } from "~core/api/services/useServices";
+import { getServicesIndexReducer as servicesIndex } from "~core/api/services/useServicesIndex";
 
 const reducers = combineReducers({
   services,

@@ -4,7 +4,7 @@ import Loader from "~/components/loader";
 import Error from "~/components/error";
 import TitleBar from "~/components/title-bar";
 import TypeCard from "./type-card";
-import { useServicesIndex } from "~/core/api/services/useServices";
+import useServicesIndex from "~/core/api/services/useServicesIndex";
 
 const TypesList = styled.ul({
   listStyle: "none",
