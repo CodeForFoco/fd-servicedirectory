@@ -4,7 +4,7 @@ import Logo from "~/components/logo";
 import Loader from "~/components/loader";
 import InputAndSubmit from "~/components/inputAndSubmit";
 import { H1 } from "~/components/typography";
-import { useSelector } from "react-redux";
+import api, { useAPI } from "~/core/api";
 import ServiceCard from "~/pages/services/service-card";
 import { formatService } from "~/core/utils";
 
@@ -58,8 +58,8 @@ const queryServices = (data, query) => {
 };
 
 const Search = () => {
-  const { loading, error, data } = useSelector(state => state.services);
-  const index = { error: null };
+  const { loading, error, data } = useAPI(api.getAllServices);
+  const index = useAPI(api.getIndex);
   const urlQuery = new URLSearchParams(location.search);
 
   const [searchValue, setSearchValue] = useState(urlQuery.get("s") || "");
