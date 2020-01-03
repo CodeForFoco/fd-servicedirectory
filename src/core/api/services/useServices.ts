@@ -11,8 +11,9 @@ export const useServices = (): Request => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (services && services.data) return;
-    dispatch(getAllServices);
+    if (!services || !services.data) {
+      dispatch(getAllServices);
+    }
   }, []);
 
   return services;
