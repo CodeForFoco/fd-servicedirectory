@@ -1,7 +1,14 @@
 import formattedService from "../types/formattedService";
 
-interface iSheet {
-  valueRanges: any[];
+export interface iSheet {
+  spreadsheetid: string;
+  valueRanges: valueRangeItem[];
+}
+
+export interface valueRangeItem {
+  range: string;
+  majorDimension: string;
+  values: string[];
 }
 
 // Returns the rows of data from a sheet (excluding the header row)
