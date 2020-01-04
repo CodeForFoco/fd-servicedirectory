@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import Loader from "~/components/loader";
 import Error from "~/components/error";
+import Loader from "~/components/loader";
+import React, { Fragment } from "react";
+import ServiceCard from "~/pages/services/service-card";
+import styled from "styled-components";
 import TitleBar from "~/components/title-bar";
 import useServices from "~/core/api/services/useServices";
-import ServiceCard from "~/pages/services/service-card";
 
 const ServicesList = styled.ul({
   listStyle: "none",

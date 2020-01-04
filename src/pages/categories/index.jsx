@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
-import useServicesIndex from "~/core/api/services/useServicesIndex";
-import styled from "styled-components";
-import Logo from "~/components/logo";
-import Loader from "~/components/loader";
+import CategoryCard from "./category-card";
 import Error from "~/components/error";
 import { H1 } from "~/components/typography";
-import CategoryCard from "./category-card";
+import Logo from "~/components/logo";
+import Loader from "~/components/loader";
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import useServicesIndex from "~/core/api/services/useServicesIndex";
 
 const StyledLogo = styled(Logo)({
   margin: "48px auto",

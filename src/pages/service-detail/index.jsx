@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
 import Box from "~/components/box";
 import Button from "~/components/button";
 import Divider from "~/components/divider";
-import Loader from "~/components/loader";
 import Error from "~/components/error";
-import PhysicalInfo from "~/components/physical-info";
-import Requirements from "~/components/requirements";
-import TitleBar from "~/components/title-bar";
-import { P1, P2 } from "~/components/typography";
-import useServices from "~/core/api/services/useServices";
 import { formatPhoneNumber } from "~/core/utils";
+import Loader from "~/components/loader";
+import PhysicalInfo from "~/components/physical-info";
+import { P1, P2 } from "~/components/typography";
+import React, { Fragment } from "react";
+import Requirements from "~/components/requirements";
+import styled from "styled-components";
+import TitleBar from "~/components/title-bar";
+import useServices from "~/core/api/services/useServices";
 
 const ServiceCard = styled(Box)({
   margin: "72px 16px 0 16px",

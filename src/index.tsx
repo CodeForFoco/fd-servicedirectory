@@ -4,7 +4,7 @@ import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
-import { initializeStore } from "~core/store";
+import { initializeStore } from "~/core/store";
 import Nav from "~/components/nav";
 import theme from "~/core/theme";
 import Categories from "~/pages/categories";
