@@ -49,7 +49,7 @@ const Categories = () => {
     <Fragment>
       <StyledLogo />
       <IntroText>Pick a category to see services in your area.</IntroText>
-      {loading || !data ? (
+      {loading ? (
         <Loader />
       ) : (
         <CategoryList>
