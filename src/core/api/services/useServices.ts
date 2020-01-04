@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { stringify } from "qs";
 import { formatService } from "~core/utils";
 
-import { ActionRequest, Request } from "~/types/services";
+import { ActionRequest, Request, FormattedService } from "~/types/services";
 import { axiosClient as client, DEFAULT_ERROR_MESSAGE } from "~/core/constants";
 
 export const useServices = (): Request => {
@@ -86,7 +86,7 @@ export const getServicesReducer = (
   }
 };
 
-export const getServicesSuccess = (payload: any) => ({
+export const getServicesSuccess = (payload: FormattedService[][]) => ({
   type: "GET_SERVICES_SUCCESS",
   payload,
   errorMessage: null,
