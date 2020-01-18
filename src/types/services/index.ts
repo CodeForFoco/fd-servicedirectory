@@ -1,4 +1,16 @@
-export interface formattedService {
+export interface ActionRequest {
+  type: string;
+  errorMessage?: any;
+  payload?: any;
+}
+
+export interface Request {
+  loading: boolean;
+  errorMessage: any;
+  data: any;
+}
+
+export interface FormattedService {
   address: string;
   description: string;
   hours: number;
@@ -17,5 +29,3 @@ export interface formattedService {
     lowIncome: boolean;
   };
 }
-
-export default formattedService;

@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
 import Box from "~/components/box";
 import Button from "~/components/button";
 import Divider from "~/components/divider";
-import Loader from "~/components/loader";
 import Error from "~/components/error";
+import { formatPhoneNumber } from "~/core/utils";
+import Loader from "~/components/loader";
 import PhysicalInfo from "~/components/physical-info";
-import Requirements from "~/components/requirements";
-import TitleBar from "~/components/title-bar";
 import { P1, P2 } from "~/components/typography";
-import api, { useAPI } from "~/core/api";
-import { formatPhoneNumber, formatService } from "~/core/utils";
+import React, { Fragment } from "react";
+import Requirements from "~/components/requirements";
+import styled from "styled-components";
+import TitleBar from "~/components/title-bar";
+import useServices from "~/core/api/services/useServices";
 
 const ServiceCard = styled(Box)({
   margin: "72px 16px 0 16px",
@@ -32,8 +32,7 @@ const PhoneLink = styled.a({
 
 const ServiceDetail = ({ match }) => {
   const { categoryId, serviceId, typeId } = match.params;
-
-  const { loading, errorMessage, data } = useAPI(api.getServicesByType, typeId);
+  const { loading, errorMessage, data } = useServices();
 
   if (loading) {
     return <Loader />;
@@ -43,15 +42,13 @@ const ServiceDetail = ({ match }) => {
     return <Error {...{ errorMessage }} />;
   }
 
-  const serviceRow = data.find(d => d[1] === serviceId);
+  const typeList = data.find(typeList => typeList[1].type === typeId);
+  const service = typeList.find(service => service.id === serviceId);
 
   // If no service is found, show an empty state
-  if (!serviceRow) {
+  if (!service) {
     return <p>No service was found that matches this id!</p>;
   }
-
-  // Format the service into a useful object
-  const service = formatService(serviceRow);
 
   return (
     <Fragment>

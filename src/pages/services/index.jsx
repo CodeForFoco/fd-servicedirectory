@@ -1,11 +1,10 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import Loader from "~/components/loader";
 import Error from "~/components/error";
-import TitleBar from "~/components/title-bar";
-import api, { useAPI } from "~/core/api";
-import { formatService } from "~/core/utils";
+import Loader from "~/components/loader";
+import React, { Fragment } from "react";
 import ServiceCard from "~/pages/services/service-card";
+import styled from "styled-components";
+import TitleBar from "~/components/title-bar";
+import useServices from "~/core/api/services/useServices";
 
 const ServicesList = styled.ul({
   listStyle: "none",
@@ -15,8 +14,7 @@ const ServicesList = styled.ul({
 
 const Services = ({ match }) => {
   const { categoryId, typeId } = match.params;
-
-  const { loading, errorMessage, data } = useAPI(api.getServicesByType, typeId);
+  const { loading, errorMessage, data } = useServices();
 
   if (loading) {
     return <Loader />;
@@ -26,25 +24,21 @@ const Services = ({ match }) => {
     return <Error {...{ errorMessage }} />;
   }
 
-  // Format services into useful objects
-  const services = data.map(formatService);
+  // Get my services
+  const myServices = getMyServices(data, typeId);
 
-  // If there are no services, show an empty state
-  if (services.length === 0) {
-    return <p>No types were found for this category!</p>;
+  if (!myServices || myServices.length === 0) {
+    return <p>No services were found for this type!</p>;
   }
-
-  // Grab the current type from the first service
-  const currentType = services[0].type;
 
   return (
     <Fragment>
       <TitleBar
         backLink={`/categories/${categoryId}`}
-        title={`${currentType} (${services.length})`}
+        title={`${typeId} (${myServices.length})`}
       />
       <ServicesList>
-        {services.map(s => (
+        {myServices.map(s => (
           <ServiceCard
             link={`/categories/${categoryId}/${typeId}/${s.id}`}
             key={s.id}
@@ -54,6 +48,18 @@ const Services = ({ match }) => {
       </ServicesList>
     </Fragment>
   );
+};
+
+const getMyServices = (allTypes, myType) => {
+  let myServices = [];
+
+  allTypes.forEach(services => {
+    if (services[1].type === myType) {
+      myServices = services;
+    }
+  });
+
+  return myServices;
 };
 
 export default Services;

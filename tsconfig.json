@@ -1,0 +1,13 @@
+// References:
+// https://parceljs.org/typeScript.html
+// https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "~*": ["./*"]
+    },
+    "jsx": "react",
+  },
+  "include": ["src/**/*"]
+}

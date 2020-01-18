@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import Logo from "~/components/logo";
-import Loader from "~/components/loader";
+import CategoryCard from "./category-card";
 import Error from "~/components/error";
 import { H1 } from "~/components/typography";
-import api, { useAPI } from "~/core/api";
-import CategoryCard from "./category-card";
+import Logo from "~/components/logo";
+import Loader from "~/components/loader";
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import useServicesIndex from "~/core/api/services/useServicesIndex";
 
 const StyledLogo = styled(Logo)({
   margin: "48px auto",
@@ -39,7 +39,7 @@ const getCategories = data =>
   );
 
 const Categories = () => {
-  const { loading, errorMessage, data } = useAPI(api.getIndex);
+  const { loading, errorMessage, data } = useServicesIndex();
 
   if (errorMessage) {
     return <Error {...{ errorMessage }} />;
@@ -53,8 +53,8 @@ const Categories = () => {
         <Loader />
       ) : (
         <CategoryList>
-          {getCategories(data).map(c => (
-            <CategoryCard key={c.slug} {...c} />
+          {getCategories(data).map(category => (
+            <CategoryCard key={category.slug} {...category} />
           ))}
         </CategoryList>
       )}

@@ -1,10 +1,10 @@
+import Error from "~/components/error";
+import Loader from "~/components/loader";
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import Loader from "~/components/loader";
-import Error from "~/components/error";
 import TitleBar from "~/components/title-bar";
-import api, { useAPI } from "~/core/api";
 import TypeCard from "./type-card";
+import useServicesIndex from "~/core/api/services/useServicesIndex";
 
 const TypesList = styled.ul({
   listStyle: "none",
@@ -13,8 +13,8 @@ const TypesList = styled.ul({
 });
 
 const Types = ({ match }) => {
+  const { loading, errorMessage, data } = useServicesIndex();
   const { categoryId } = match.params;
-  const { loading, errorMessage, data } = useAPI(api.getIndex);
 
   if (loading) {
     return <Loader />;

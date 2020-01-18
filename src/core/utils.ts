@@ -1,11 +1,18 @@
-import formattedService from "./interfaces/formattedService";
+import { FormattedService } from "~/types/services";
 
-interface iSheet {
-  valueRanges: Array<any>;
+export interface iSheet {
+  spreadsheetid: string;
+  valueRanges: valueRangeItem[];
+}
+
+export interface valueRangeItem {
+  range: string;
+  majorDimension: string;
+  values: string[];
 }
 
 // Returns the rows of data from a sheet (excluding the header row)
-export const getSheetData = (sheet: iSheet): Array<any> => {
+export const getSheetData = (sheet: iSheet): string[] => {
   const items = sheet.valueRanges[0].values;
   // Remove the header row
   items.shift();
@@ -18,7 +25,7 @@ export const getSheetData = (sheet: iSheet): Array<any> => {
  * Note: A fallback is required for the Phone # field because
  * the Sheets API omits the last column if there's no value.
  */
-export const formatService = (service: any): formattedService => {
+export const formatService = (service: any): FormattedService => {
   // Split the comma separated populations into an array
   const populations = service[3] === "" ? [] : service[3].split(", ");
   return {
