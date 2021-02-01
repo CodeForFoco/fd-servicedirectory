@@ -28,11 +28,17 @@
 			"jest --bail --findRelatedTests --verbose"
 		]
 	},
+	"jest": {
+		"moduleNameMapper": {
+			"~(.*)$": "<rootDir>/src/$1"
+		}
+	},
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
 		"@babel/preset-env": "^7.4.3",
 		"@babel/preset-react": "^7.0.0",
 		"@babel/preset-typescript": "^7.7.2",
+		"@testing-library/react": "^9.4.0",
 		"babel-eslint": "^10.0.1",
 		"babel-jest": "^24.7.1",
 		"eslint": "^5.16.0",
